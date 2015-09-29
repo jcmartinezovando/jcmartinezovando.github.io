@@ -1,6 +1,6 @@
 body {
     margin: 60px auto;
-    width: 70%;
+    width: 60%;
 }
 
 nav ul, footer ul {
@@ -29,9 +29,19 @@ h1 {
     font-family:'Calibri', 'Arial', 'Sans-Serif';
 }
 
+h2 {
+    font-size: 1.5em;
+    font-family:'Calibri', 'Arial', 'Sans-Serif';
+}
+
+h3 {
+    font-size: 1em;
+    font-family:'Calibri', 'Arial', 'Sans-Serif';
+}
+
 p {
     font-size: 1.4em;
-    <!-- line-height: 1.3em; -->
+    line-height: 1.3em;
     color: #333;
 }
 
@@ -63,4 +73,3 @@ ul.posts li {
     float:right;
     width:450px;
 }
-				
