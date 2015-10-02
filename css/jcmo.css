@@ -5,7 +5,7 @@ For more information, see http://andreasviklund.com/templates/andreas01/
 
 /* Main body */
 body {
-	background:#f4f4f4 url(img/bg.gif) top center repeat-y; 
+	background:#f4f4f4 url(/css/bg.gif) top center repeat-y; 
 	color:#404040; 
 	font:76% Verdana,Tahoma,Arial,sans-serif; 
 	margin:0 auto; 
@@ -115,14 +115,51 @@ p {
 	padding:0;}
 
 /* Main menu */
-#leftside ul.avmenu, #rightside ul.avmenu {display:block; list-style:none; margin:0 0 18px 0; padding:0; width:150px;}
-#leftside ul.avmenu li, #rightside ul.avmenu li {display:inline; line-height:1.4em; padding:0; width:140px;}
-#leftside ul.avmenu li a, #rightside ul.avmenu li a {background-color:#f4f4f4; border-left:4px solid #ccc; color:#505050; float:left; font-weight:700; margin-bottom:5px; padding:5px 1px 5px 5px; text-decoration:none; width:130px;}
-#leftside ul.avmenu li a:hover,#leftside ul.avmenu li a.current, #rightside ul.avmenu li a:hover,#rightside ul.avmenu li a.current {background-color:#eaeaea; border-left:4px solid #286ea0; color:#505050;}
-#leftside ul.avmenu ul, #rightside ul.avmenu ul {font-size:0.9em; margin:0 0 0 15px; padding:0 0 5px; width:125px;}
-#leftside ul.avmenu ul a, #rightside ul.avmenu ul a {font-weight:400; padding:3px 1px 3px 5px; width:115px;}
-#leftside ul.avmenu ul ul, #rightside ul.avmenu ul ul {width:113px;}
-#leftside ul.avmenu ul ul a, #rightside ul.avmenu ul ul a {width:100px;}
+#leftside ul.avmenu, #rightside ul.avmenu {
+	display:block; 
+	list-style:none; 
+	margin:0 0 18px 0; 
+	padding:0; 
+	width:150px;
+	}
+#leftside ul.avmenu li, #rightside ul.avmenu li {
+	display:inline; 
+	line-height:1.4em; 
+	padding:0; width:140px;
+	}
+#leftside ul.avmenu li a, #rightside ul.avmenu li a {
+	background-color:#f4f4f4; 
+	border-left:4px solid #ccc; 
+	color:#505050; 
+	float:left; 
+	font-weight:700; 
+	margin-bottom:5px; 
+	padding:5px 1px 5px 5px; 
+	text-decoration:none; 
+	width:130px;
+	}
+#leftside ul.avmenu li a:hover,#leftside ul.avmenu li a.current, #rightside ul.avmenu li a:hover,#rightside ul.avmenu li a.current {
+	background-color:#eaeaea; 
+	border-left:4px solid #286ea0; 
+	color:#505050;
+	}
+#leftside ul.avmenu ul, #rightside ul.avmenu ul {
+	font-size:0.9em; 
+	margin:0 0 0 15px; 
+	padding:0 0 5px; 
+	width:125px;
+	}
+#leftside ul.avmenu ul a, #rightside ul.avmenu ul a {
+	font-weight:400; 
+	padding:3px 1px 3px 5px; 
+	width:115px;
+	}
+#leftside ul.avmenu ul ul, #rightside ul.avmenu ul ul {
+	width:113px;
+	}
+#leftside ul.avmenu ul ul a, #rightside ul.avmenu ul ul a {
+	width:100px;
+	}
 
 /* Main content */
 #content {border-left:1px solid #e0e0e0; border-right:1px solid #e0e0e0; line-height:1.5em; margin:0 150px 5px; padding:0 10px;}
