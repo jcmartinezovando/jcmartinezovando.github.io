@@ -1,0 +1,368 @@
+
+body {
+	background-color: #eee;
+    color: #111;
+    font-size: 12px;
+    font-family: Verdana, Helvetica, Arial, sans-serif;
+    margin: 2em 10px 10px 10px;
+}
+
+a:link {
+	color: #25a;
+}
+a:visited {
+	color: #637;
+}
+/* ------------------------------------------------------------------
+  HEADER
+  ------------------------------------------------------------------- */
+  
+#header {
+	clear:both;
+#	background-image: url(index/Jardin.jpg);
+	background-image: index/Jardin.jpg;
+	background-repeat: repeat-x;
+	height: 120px;
+    margin:0;
+    padding: 0;
+    border: solid 1px #eef;
+
+}
+
+#header-text{
+    width:100%;
+	background-image: url(images/bluegrid2.gif);
+	background-repeat: no-repeat;
+	margin: 15px 0 0px 15px;
+    padding:0;
+	height: 105px;
+}
+
+#header-text h1{
+    font-family: "Bookman Old Style", Times, "Times New Roman", TimesNR, serif;
+	font-size: 55px;
+	font-weight: normal;
+    color:#003;
+    padding: 0 0 0 0;
+    margin:10px 0 0 20px;
+    letter-spacing: 1.5px;
+
+}
+#header-text h2{
+	font-size: 24px;
+    font-family: "Bookman Old Style", Times, "Times New Roman", TimesNR, serif;
+	font-weight: normal;
+    color:#eee;
+    padding: 0 0 0 0;
+    margin: -15 5px 0 40px;
+	font-style: italic;
+    letter-spacing: 4px;
+}
+
+/* ------------------------------------------------------------------
+  MAIN CONTENT
+  ------------------------------------------------------------------- */
+
+#main-content {
+	float: left;
+	width: 70%;
+	margin-left: 20px;
+	background-color: #fff;
+	border-right: solid 1px #ddd;
+	border-left: solid 1px #ddd;
+	padding: 1em 1em 1em 1em;
+    min-height: 40em;
+}
+
+#main-content  h1 {
+    font-family:  Times, "Times New Roman", TimesNR, serif;
+	text-transform: uppercase;
+	font-weight:normal;
+	color: #003;
+	letter-spacing: .2em;
+	font-size: 2.5em;
+	text-align: right;
+}
+
+#main-content  h2 {
+	border-bottom: solid 1px #ddd;
+	font-variant: small-caps;
+	font-weight: normal;
+	color: #003;
+	letter-spacing: .1em;
+	font-size: 2em;
+	margin: 1em 0 1em 0;
+}
+
+#main-content  h3 {
+	font-weight: bold;
+	color: #003;
+	letter-spacing: .1em;
+	font-size: 1em;
+	margin: 1em 0 1em 0;
+}
+
+#main-content  p,  dd, dt, ul, li{
+	line-height: 150%;
+}
+
+ #main-content table {
+ 	padding-left: 1em;
+	margin-bottom: 2em;
+ }
+ 
+ #main-content th {
+  text-align: left;
+  border-top: solid 1px #003;
+  border-bottom: solid 1px #003;
+  }
+
+ #main-content tbody {
+      border: solid 1px red;
+  }
+
+#main-content  dt {
+	font-style: italic;
+	font-weight: bold;
+}
+
+dl.qanda {
+	padding-bottom: 1em;
+    }
+    
+ 
+dl.qanda  dt {
+	font-style: italic;
+	font-weight: bold;
+    padding-top:1em;
+}
+
+dl.qanda  dd {
+	padding-top: 0.5em;
+}
+
+#main-content div.address ul{
+	margin:0 1em 2em 3em ;
+	padding:0;
+	list-style: none;
+}
+#main-content div.address li{
+	font-style: italic;
+}
+
+.info {
+	font-style: italic;
+}
+
+
+#main-content li{
+	padding-top: 1em;
+}
+
+#main-content li ol,ul{
+	padding:.5em;
+}
+
+#main-content li li{
+	padding-top: 0.1em;
+}
+
+/* ------------------------------------------------------------------
+  COURSE INDEX
+  ------------------------------------------------------------------- */
+
+#course-index {
+	display: inline; /* fix the IE double-float margin bug*/ 
+	float: left;
+	width:150px;
+	margin-left: 15px;
+	margin-top:1em;
+}
+#course-index h3 {
+	display: none;
+}
+#course-index ul {
+	margin:0;
+	padding:0;
+	list-style: none;
+	border-top: 1px solid #ddd;
+}
+
+#course-index li ul {
+	margin: 0 0 0 20px;
+	padding:0;
+	border: none;
+}
+
+#course-index li {
+	font-size: 1em;
+	font-weight:bold;
+	border-bottom: 1px solid #eef;
+	border-left: 1px solid #eef;
+	padding-top: .5em;
+	padding-bottom: .3em;
+    padding-left:10px;
+    background-color:#ddd;
+}
+
+#course-index li li {
+	font-size: .9em;
+	font-weight:normal;
+	border:none;
+	padding: 0;
+}
+ 
+#course-index a:link, #course-index a:visited {
+	text-decoration: none;
+
+ }
+#course-index  a:hover {
+
+}
+ 
+li#current-page{
+	font-style: italic;
+    color: #037;
+    border-left: solid 5px #bbb;
+}
+#current-page a: link, #current-page a:visited{
+	font-style: italic;
+    font-weight: bold;    
+    color: #314;
+    }
+/* ------------------------------------------------------------------
+  OTHER LINKS INDEX
+  ------------------------------------------------------------------- */
+
+#site-index {
+  background-color: #eee;
+ height:1.5em;
+ border-top: 1px solid #003;
+
+  
+    }
+#site-index h3 {
+	display: none;
+}
+
+
+#site-index ul {
+  padding: 0;
+  margin: 0 6% 0 3%;
+  list-style: none;
+}
+
+#site-index li ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+#site-index li {
+  float: left;
+  position: relative;
+  width: 100px;
+  background-color: #eee; 
+}
+
+#site-index li li{
+  width: 100%;
+}
+
+
+#site-index li ul {
+  display: none;
+  position: absolute; 
+  top: 2em; /* Set left and top for IE; which auotmatically positions to top right */
+  left: 0;     /* instead of bottom left */ 
+  border: solid 1px #ddd;
+  }
+
+#site-index li>ul { 
+top: auto; /* Now do it properly for other browsers*/ 
+}
+
+
+#site-index li:hover ul, #site-index li.over ul { 
+	display: block; 
+}
+ 
+ #site-index li:hover div.sub-menu, #site-index  li.over div.sub-menu { 
+	background-color: #037;
+	color: #eee;
+}
+
+ 
+#site-index a {
+	text-decoration: none;
+	display:block;
+	padding: .2em;
+}
+#site-index li li a {
+	text-align: center;
+}
+
+div.sub-menu {
+	display:block;
+	padding: .2em;
+    color: #037;
+}
+
+#site-index a:link, #site-index a:visited {
+	color: #037;
+ }
+#site-index  a:hover {
+	background-color: #037;
+	color: #eee;
+}
+
+
+
+ /* ------------------------------------------------------------------
+  FOOTER
+  ------------------------------------------------------------------- */
+
+#footer{
+	clear: both;
+    color: #444;
+    font-size: 0.8em;
+    text-align: right;
+    font-style: italic;
+    font-weight: bold;
+	border-top: solid 1px #ddd;
+	padding-top: 1em;
+    padding-right:10%;
+	background-image: url(images/greygrid.jpg);
+	background-repeat: repeat-x;
+    background-position: -5px -5px;
+    height:50px;
+}
+
+
+.note {
+	font-weight: bold;
+    color: red;
+}
+
+.soln {
+	padding-left: 5em;
+   }
+
+ul.none {
+		list-style: none;
+   }
+   
+  /* ------------------------------------------------------------------
+  OTHER
+  ------------------------------------------------------------------- */
+  
+  div.exsheet {
+  	padding-top: 1em;
+  }
+  div.exsheetsol {
+    margin-left:2em;
+  }
+  
+  span.math {
+  	font-style: italic;
+  }
