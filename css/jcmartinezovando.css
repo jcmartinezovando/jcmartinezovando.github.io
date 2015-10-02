@@ -563,7 +563,7 @@ blockquote {
 	}
 
 .container {
-	width:100%;
+	width:80%;
 	margin:0 auto
 	}
 
@@ -580,7 +580,6 @@ blockquote {
 	margin-top:0
 	}
 
-	
 .post-meta { 
 	color:#eee
 	}	
@@ -607,7 +606,7 @@ blockquote {
 		}
 	.small_links>div {
 		display:inline-block;
-		margin-top:3%
+		margin-top:3%;
 		font-size:1.0em;
 		}
 	}
