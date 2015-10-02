@@ -533,21 +533,18 @@ body {
 div.Section1 {
 	page: Section1;
 	}
-	
-#wrap {
-    width: 600px;
-	margin: 0 auto;
-	}
-
-#left_col {
-    float:left;
-    width:30%;
-	}
-
-#right_col {
-    float:right;
-    width:60%;
-	}
+	#wrap {
+		width: 600px;
+		margin: 0 auto;
+		}
+	#left_col {
+		float:left;
+		width:30%;
+		}
+	#right_col {
+		float:right;
+		width:60%;
+		}
 
 a {
     text-decoration: none;
