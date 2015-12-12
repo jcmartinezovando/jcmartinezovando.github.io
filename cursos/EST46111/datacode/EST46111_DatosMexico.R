@@ -14,6 +14,7 @@ rutawork = 'C:/JCMO.Academia/@Cursos/2015-II_Fundamentos Estadistica/_data&code/
 #		Código
 #	----------------------------------------------------
 source(paste(rutawork,"/baylinreg.R",sep = ""))
+source(paste(rutawork,"/bayhierlinreg.R",sep = ""))
 library("MASS")
 
 #	----------------------------------------------------
@@ -88,12 +89,26 @@ hist(m_sim[,2])
 hist(mf_sim[,2])
 
 #	----------------------------------------------------
+#		Regresión jerárquica lineal
+#	----------------------------------------------------
+hdata <- rdata[,c("salario","clave","inpc_general","mexindpro")]
+hdata <- cbind(hdata,hdata[,"clave"])
+colnames(hdata) <- c("salario","clave","inpc_general","mexindpro","cte")
+hdata["cte"] <- 1
+hdata <- hdata[,c("salario","clave","cte","inpc_general","mexindpro")]
+hdata <- as.data.frame(hdata)
+hdata <- as.matrix(hdata)
+
+salarios.linreg.hier <- bayhierlinreg(hdata,m_0,S_0,a_0,b_0,M)
+
+#	----------------------------------------------------
 #		Salidas
 #	----------------------------------------------------
 save( salarios.linreg,
 		 m_sim, lambda_sim,
 		 salarios.linreg.fixed,
 		 mf_sim, lambdaf_sim,
+		 salarios.linreg.hier,
 	     file = paste(rutawork,"/salarios_output.RData",sep = "")
 	)
 	

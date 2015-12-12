@@ -17,7 +17,7 @@ baylinreg <- function(Y,X,m_0,S_0,a_0,b_0) {
 
 #	Initialization
 T <- dim(Y)[1]
-p <- dim(p)[2]
+p <- dim(X)[2]
 
 #	Updating
 S_1 <- S_0 + t(X)%*%X
