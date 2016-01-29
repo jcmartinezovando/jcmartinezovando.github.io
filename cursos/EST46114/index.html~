@@ -100,10 +100,14 @@
 				<!--	Temario	-->	
 				<h2><a href="/cursos/EST46114/docs/EST46114_EstadisticaMultivariada_Temario.pdf">Temario</a></h2>
 
-				<!--	Fechas Importantes  -->
+				<!--	Fechas Importantes		
 				<h3>Fechas importantes</h3>
 				<ul>
-					<li> &nbsp; 1er. Examen Parcial: &nbsp; <strong>Mar 17, 15</strong> - Presencial.</li>
+		        	<!--
+					<li> &nbsp; 1er. Examen Parcial: &nbsp; <strong>Oct 13, 15</strong> - A casa.</li>
+		        	<li> &nbsp; Trabajo Final Parte A: &nbsp; <strong>Nov 27, 15</strong> - A casa.</li>
+		        	<li> &nbsp; Trabajo Final Parte B: &nbsp; <strong>Dic 16, 15</strong> - A casa.</li>
+					
 				</ul><!--	End:Fechas Importantes	-->
 
 				<!--	Material del Curso	-->	
