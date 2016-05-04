@@ -6,7 +6,7 @@
 #
 #		Sesión:	3 de Mayo de 2016
 #
-#       Este código fue probado en R v.3.2.2
+#       Este código fue probado en R v.3.2.4
 #
 
 rm(list = ls())
@@ -187,4 +187,4 @@ write.csv(sevpred.2008, file = paste(path.plot,"act11302_160503_sevpred.2008.csv
 sevhist.2008 <- hist(sevpred.2008, 50, main="Individual Severity", xlab="Simulated Data")
 
 #
-#	-- FIN: ACT11302_RuinTehory_Script.R --
+#	-- FIN: ACT11302_RuinTheory_Script.R --
