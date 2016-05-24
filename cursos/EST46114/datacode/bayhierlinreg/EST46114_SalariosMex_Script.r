@@ -1,26 +1,27 @@
 #
-#	EST-46114:	Inferencia Bayesiana en Alta Dimensión (Maestría en Ciencia de Datos)
-#	Autor: 			Juan~Carlos Martínez Ovando
+#	EST-46114:	Inferencia Bayesiana en Alta Dimension (Maestria en Ciencia de Datos)
+#	Autor: 			Juan~Carlos Martinez Ovando
 #	Email:			juan.martinez.ovando@itam.mx
 #						jc.martinez.ovando@gmail.com
 #	
-#	Modelos Lineales de Regresión
+#	Modelos Lineales de Regresion
 #	
 
 rm(list = ls())
-rutawork = 'C:/JCMO.Academia/@Cursos/2016-I_Inferencia Bayesiana en Alta Dimensión/_data&code/SalariosMex'
+#rutawork = 'C:/JCMO.Academia/@Cursos/2016-I_Inferencia Bayesiana en Alta Dimension/_data&code/SalariosMex/'
+	rutawork <- '/media/jcmo/ROCA\ ADATA/JCMO.Academia/@Cursos/2016-I_Inferencia\ Bayesiana\ en\ Alta Dimension/_data&code/SalariosMex/'
  
 #	----------------------------------------------------
-#		Código
+#		Codigo
 #	----------------------------------------------------
-source(paste(rutawork,"/EST46114_SalariosMex_Code.R",sep = ""))
-library("MASS")
+codepath <- paste(rutawork,'EST46114_SalariosMex_Code.R',sep = "") 
+source(codepath)
+library('MASS')
 
 #	----------------------------------------------------
 #		Datos
 #	----------------------------------------------------
-#	Loading the data...
-rdata <- read.csv(paste(rutawork,"/EST46114_SalariosMex.csv",sep = ""), header = TRUE, sep = ",", quote="\"", dec=".", fill = TRUE)
+rdata <- read.csv(paste(rutawork,'EST46114_SalariosMex.csv',sep = ""), header = TRUE, sep = ",", quote="\"", dec=".", fill = TRUE)
 
 rdata <- as.data.frame(rdata)
 
@@ -40,7 +41,7 @@ p <- dim(X)[2]
 M <- 1000 			#	Número de simulaciones
 
 #	----------------------------------------------------
-#		Regresión lineal simple
+#		Regresion lineal simple
 #	----------------------------------------------------
 m_0 <-  solve(t(X)%*%X)%*%t(X)%*%Y
 S_0 <- diag(1,p,p)
@@ -57,7 +58,7 @@ for(t in 1:M){
 colnames(m_sim) <- colnames(X)  
 
 #	----------------------------------------------------
-#		Regresión lineal con efectos fijos
+#		Regresion lineal con efectos fijos
 #	----------------------------------------------------
 J <- max(unique(rdata[,"clave"])) - 1
 rdataf <- rdata
@@ -88,7 +89,7 @@ hist(m_sim[,2])
 hist(mf_sim[,2])
 
 #	----------------------------------------------------
-#		Regresión jerárquica lineal
+#		Regresion jerarquica lineal
 #	----------------------------------------------------
 hdata <- rdata[,c("salario","clave","inpc_general","mexindpro")]
 hdata <- cbind(hdata,hdata[,"clave"])
@@ -108,7 +109,7 @@ save( salarios.linreg,
 		 salarios.linreg.fixed,
 		 mf_sim, lambdaf_sim,
 		 salarios.linreg.hier,
-	     file = paste(rutawork,"/EST46114_SalariosMex.RData",sep = "")
+	     file = paste(rutawork,'EST46114_SalariosMex.RData',sep = "")
 	)
 	
 #
