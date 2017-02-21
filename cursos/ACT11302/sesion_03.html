@@ -130,7 +130,7 @@ $(document).ready(function () {
 \]</span> para <span class="math inline">\(j=1,\ldots,J\)</span>.</p>
 <p>Suponemos, adicionalmente, que los reclamos son v.a.i.i.d. con distribucion <span class="math display">\[
 F_X(x)=\theta\delta_{\{0\}}(x)+(1-\theta)F^{c}_X(x),
-\]</span> donde <span class="math inline">\(\theta = \mathbb{P}(\text{siniestro})\)</span> y <span class="math inline">\(F^{c}_X(x)=\mathbb{P}\left(X\leq x|\text{no siniestro}\right)\)</span> es una distribucion con soporte en <span class="math inline">\((0.\infty)\)</span>.</p>
+\]</span> donde <span class="math inline">\(\theta = \mathbb{P}(\text{no siniestro})\)</span> y <span class="math inline">\(F^{c}_X(x)=\mathbb{P}\left(X\leq x|\text{siniestro}\right)\)</span> es una distribucion con soporte en <span class="math inline">\((0,\infty)\)</span>.</p>
 El monto agregado de reclamos del portafolio de tamano <span class="math inline">\(J\)</span> se define como <span class="math display">\[
 S = \sum_{j=1}^{J} X_j.
 \]</span> Siendo que <span class="math inline">\(J\)</span> se considera como un parametro fijo en el modelo, tenemos que
@@ -142,10 +142,10 @@ var(S)
   &amp; = &amp; J var(X),
   \nonumber 
 \end{eqnarray}\]</span>
-<p>Denotemos por <span class="math inline">\(\mu_X = \mathbb{E}\left(X|\text{no siniestro}\right)\)</span> y por <span class="math inline">\(\sigma_X^{2}=var\left(X|\text{no siniestro}\right)\)</span>. Como <span class="math inline">\(X\)</span> es una variable aleatoria del tipo mixta, tenemos que</p>
+<p>Denotemos por <span class="math inline">\(\mu_X = \mathbb{E}\left(X|\text{siniestro}\right)\)</span> y por <span class="math inline">\(\sigma_X^{2}=var\left(X|\text{siniestro}\right)\)</span>. Como <span class="math inline">\(X\)</span> es una variable aleatoria del tipo mixta, tenemos que</p>
 <span class="math display">\[\begin{eqnarray}
 \mathbb{E}(S) 
-  &amp; = &amp; J(1-\theta)\mu_(X) 
+  &amp; = &amp; J(1-\theta)\mu_{X} 
   \nonumber \\
 var(S) 
   &amp; = &amp; J \left(\mu^{2}_X\theta(1-\theta) + (1-\theta)\sigma_{X}^{2}\right). 
