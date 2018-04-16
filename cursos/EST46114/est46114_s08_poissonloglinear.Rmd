@@ -1,0 +1,228 @@
+---
+title: "S08 -  Modelos Poisson Log-lineales"
+author: "Juan Carlos Martinez-Ovando"
+date: "Primavera 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(message = FALSE, include = FALSE)
+```
+
+**Objetivo**
+
+En esta sesion aprenderemos los fundamentos matematicos de la extension de los modelos log-lineales para analizar tablas de contingencia multidimensionales para incluir un componente Poisson en los conteos.
+
+* La implementacion de estos modelos se realiza el enfoque bayesiano de inferencia.
+
+* Prestaremos atencion a una reparametrizacion de estos modelos que permite hacer inferencia de manera parciomoniosa.
+
+Continuamos con el estudio de estos modelos como preludio de los modelos multidireccionales (a.k.a. *multi-way models*) y de los modelos de grafos probabilisticos.
+
+---
+
+# Parte 1 - Fundamentos
+
+## Notacion
+
+Recordemos de lecciones previas que los modelos log-lineales para tablas de contingencia se caracterizan por modelas las probabilidad de cada `celda` (i.e. entrada de cada componente de la tabla de contingencia), con una de las siguientes tres distribuciones:
+
+1. Multinomial
+
+2. Poisson
+
+3. Multinomial producto.
+
+Las tres distribuciones pertenecen a la *Familia Exponencial de Distribuciones*, por lo que bajo el enfoque bayesiano la distribución inicial para sus parámetros siempre podrá ser conjugada.
+
+El componente comun de las *tres representaciones* anteriores es que el valor esperado del conteo de cada una de sus `celdas` es expresado como el producto de los componentes dimensionales que corespondan a la configuración del modelos que elijamos. Por ejemplo, en una tabla de contingencia de tres dimensiones tenemos que si $$m_{ijk}=\mathbb{E}(M_{ijk}),$$ para el cruce de las tres dimensiones en en nivel $i$ para la *primera dimensión*, el nivel $j$ para la *segunda*, y el nivel $k$ en la *tercera* es representada (en el *caso saturado*) como, 
+\begin{equation}
+m_{ijk}=\theta \times 
+        \theta_{1(i)} \times \theta_{2(j)} \times \theta_{3(k)}  \times 
+        \theta_{12(ij)} \times \theta_{13(ik)} \times \theta_{23(jk)} \times 
+        \theta_{123(ijk)},
+\end{equation}
+con las siguientes restricciones para tener **identificabilidad** de los parámetros,
+\begin{eqnarray}
+1 & = & \sum_{i}\theta_{1(i)}=\sum_{j}\theta_{2(j)}=\sum_{k}\theta_{3(k)}, \\
+1 & = & \sum_{i}\theta_{12(ij)} = \sum_{j}\theta_{12(ij)}, \\
+1 & = & \sum_{i}\theta_{13(ik)} = \sum_{k}\theta_{13(ik)}, \\
+1 & = & \sum_{j}\theta_{23(jk)} = \sum_{k}\theta_{23(jk)}, \\
+1 & = & \sum_{i}\theta_{123(ijk)} = \sum_{j}\theta_{123(ijk)}=\sum_{k}\theta_{123(ijk)}.
+\end{eqnarray}
+
+**Nota:** Observen que estamos empleando una notación distinta a la vista anteriormentepara los factores. Esto es porque la notación de estas notas es frecuentemente empleada en la literatura también, así nos familiarizamos con ella.
+
+**Nota:** La versión logaritmica de $m_{ijk}$ da origen a la representación aditiva de los **modelos log-lineales** en los que cada uno de los factores genéricos ${l(w)}$s es expresada como $$u_{{l(w)}}=\text{log}\left(\theta_{{l(w)}}\right).$$
+
+## Conexión con los **modelos lineales generalizados**
+
+Dado que de una tabla de contingencia se modela el valor esperado de las entradas de cada celda, $m_{ijk}$ descrita unas lineas arriva, y derivado de la representación aditiva de su relación con los factores genéreicos $u_{l(w)}$s, se sigue que los factores mismos pueden definirse como *covariables*, por lo que se cumple la siguiente relación,
+$$
+g(m_{ijk})=\text{log}(m_{ijk}(u_{l(w)}\text{s correspondientes})).
+$$
+Siendo que la dsitribución de los $M_{ijk}$ pertenece a la *Familia Exponencial de Distribuciones* se tiene que los modelos log-lineales son un caso particular de los *modelos lineales generalizados* (GLM, por sus siglas en inglés). 
+
+**Nota:** Los modelos para tablas de contingencia con un objeto peculiar en estadística, pues tienen diferentes representaciones. Su forma como GLM se remonta a la década de los 70s. Una representación alternativa asociada a la década de los 90s corresponde a los modelos de grafos probabilísticos (los cuales veremos en detalle).
+
+**Ejemplo: Poisson log-lineal**
+
+Un ejemplo de la relación anterior los podemos asociar con el modelo *Poisson log-lineal* pata la tabla de contingencia de $2\times 2$ con *dos factores* (es el caso del modelo saturado). En este caso, 
+$$
+\text{log}(m_{ij}) = u + u_{1(i)} + u_{2(j)} + u_{12(ij)}.
+$$
+La relación anterior y el modelo en sí mismo puede expresarse como un GLM para $m_{ijk}$ como
+$$
+m_{ijk} = \boldsymbol{x}_{ijk}'\beta,
+$$
+donde $\boldsymbol{X}$ corresponde a la configuración del modelo para la celda $ijk$ en *variables dummy* y $\beta$ representa la colección vectorial de todos los factores $u_{l(w)}$s. Es decir, la representación matricial de estos componentes es
+$$
+  \boldsymbol{X} = 
+  \begin{bmatrix}
+  1 & 1 & 0 & 1 & 0 & 1 & 0 & 0 & 0 \\ 
+  1 & 1 & 0 & 0 & 1 & 0 & 1 & 0 & 0 \\ 
+  1 & 0 & 1 & 1 & 0 & 0 & 0 & 1 & 0 \\ 
+  1 & 0 & 1 & 0 & 1 & 0 & 0 & 0 & 1 
+  \end{bmatrix},
+$$
+y
+$$
+\beta =
+  \begin{bmatrix}
+  u & u_{1(1)} & u_{1(2)} & u_{2(1)} & u_{2(2)} & u_{12(11)} & u_{12(12)} & u_{12(21)} & u_{12(22)}
+  \end{bmatrix}'.
+$$
+**Nota:** La matriz $\boldsymbol{X}$ refleja ya las restricciones de *identificabilidad* del modelo.
+
+## Tipos de **modelos log-lineales**
+
+Los modelos log-lineales pueden a su vez clasificarse de la siguiente forma:
+
+#### a. Modelo log-lineales jerárquicos
+
+El modelo *jerárquico* se define cmo aquel que contiene todos los factores de ordenes menores que pueden ser generados por las variables contenidas en un factor de orden mayor.
+
+**Ejemplo:** Para un modelo $I \times J \times K$ (tabla de contingencia de dimensión tres), el modelo será *jerárquico* si e.g. 
+
+* $u_{12(\cdot)}$ está incluido entonces $u_{1(cdot)}$ y $u_{2(\cdot)}$ están incluidos, o análogamente, 
+
+* $u_{2(cdot)}=0$ (i.e. no incluido) entonces $u_{12_{\cdot}} = u_{23(\cdot)} = u_{123(\cdot)}=0$ (i.e. estos factores no están incluidos).
+
+**Nota:** Podemos pensar en los modelos jerárquicos como aquellos asociados con una **clase generadora**, la cual se define como los factores de ordenes mayores asociados con el modelo *log-linear jerárquico* (siendo que todas las clases de orden menor están incluidas). Las clases generadoras en tablas $D$ simensionales se denotan por $$\mathcal{C}=\left\{[i_{1},\ldots,i_{D}]: i_{d}\text{ denota inclusión de la dimensión }d\right\}.$$
+
+**Ejemplo.** El modelo $I\times J\times K \times L$ con la *clase generadora* dada por $$\mathcal{C}=\left\{[123],[34]\right\},$$
+incluye los factores $$\{[3],[4],[34]\},$$ generados por $[34]$, y $$\{[1],[2],[3],[12],[13],[23],[123]\},$$ generados por $[123]$.
+
+**Ejercicio:** Expresen el modelo log-lineal explícito.
+
+#### b. Modelo log-lineal exhaustivo
+
+Se define el modelo *exhaustivo* como el modelo log-lineal en el que se se incluyen los factores principales de todas sus dimensiones (incluyendo también factores de interacción de cualquier orden).
+
+#### c. Modelo log-lineal gráfico
+
+#### d. Modelo log-lineal analizable (**decomposable**) 
+
+**NOTA IMPORTANTE.-***Las clases de mdelos gráficos y analizable la revisaremos la siguiente clase. Para entender estas clases de modelos necesitamos revisar primero definiciones y propiedas de modelos de grafos probabilísticos.
+
+## Inferencia bayesiana
+
+En el caso del modelo **Poisson log-lineal** existe una distribución conjugada para $\beta$ en la representación como GLM del modelo. Tal distribución inicial se denota por $\pi(\beta)$ (de manera genérica, los detales específicos los podemos revisar en una cita complemetaria).
+
+Una vez definiciendo la distribución inicial, la distriución final de la configuración $v\in\mathcal{I}$ --retomando la notación de la clase anterior--, se obtiene como
+$$
+\pi(\beta|\boldsymbol{m},\boldsymbol{X}_{v})\propto p(m|\boldsymbol{X}_{v}'\beta)\pi(\beta),
+$$
+cuya contante de normalización no puede obtenerse de manera analítica cerrada. De esta manera, la distribución final se *aproxima* numéricamente empleando métodos de simulación. En particular, se emplea el muestreador de Gibbs.
+
+#### Factores de Bayes
+
+Recordemos que una parte importante del procedimiento consiste en calcular la distribución final de $\beta$, pero que en tablas de contingencia necesitamos comparar la *plausibilidad* de varias hipótesis asociadas con los modelos. Así, por ejemplo, si necesitamos comparar dos modelos $v,w \in \mathcal{I}$, bajo el enfoque bayesiano la evidencia de $v$ respecto a $w$ se resume como el cociente de las distribuciones finales de ambos modelos. Tal cociente se conoce como el **factor de Bayes** (BF, por sus siglas en inglés), i.e.
+$$
+\text{BF}(v,w)=\frac{\pi(\beta|\boldsymbol{m},\boldsymbol{X}_{v})}{\pi(\beta|\boldsymbol{m},\boldsymbol{X}_{w})}.
+$$
+En los GLM el factor de bayes puede calcularse de manera relativamente simple empleandoel algoritmo *bridge sampling*.
+
+#### Incertidumbre de los modelos
+
+Bajo el paradigma bayesiano de inferencia, cuando un modelo puede defirnirse de maneras alternativas --preservando una forma estructural particular--, la noción de incertidumbre sobre el modelo puede definirse conjuntamente sobre el *conjunto de parámetros que caracterizan una forma estructural particular*, $\beta_{v}$ en este caso, así como la forma estructural misma, $vin\mathcal{I}$, de tal forma que la distribución incial toma la forma $$\pi(\beta_{v},v)=\pi(v)\times \pi(\beta_{v}|v),$$
+para todo $v\in \mathcal{I}$.
+
+De igual forma, la dsitribución conjunta final se calcula como,
+$$
+\pi(\beta_{v},v|\boldsymbol{m},\boldsymbol{X}_{v})
+\propto p(\boldsymbol{m}|\boldsymbol{X}_{v}'\beta_{v}) \times \pi(\beta_{v}|v) \times \pi(v),
+$$
+la cual se calcula de manera relativa a todos los modelos $v\in\mathcal{I}$. En este caso, la distribción final se calcula empleando métodos numéricos, porque la constante de normalización no es conocida analíticamente en esta clase de modelos. Su cómputo puede realizarse empleando el *bridge sampling* también.
+
+#### Selección bayesiana de modelos
+
+El problema de elegir la mejor opción de $v$ en $\mathcal{I}$ es visto como problema de **comparación y selección de modelos**. Bajo el paradigma bayesiano, $\pi(v)$ representa la creencia inicial acerca de la plausibilidad de $v$, mientras que $\pi(v|\boldsymbol{m},\boldsymbol{X}_{v})$ representa la palusibilidad ajustda a la luz de la información contenida en los datos. De esta forma, el **modelo óptimo** bajo el paradigma bayesiano es tal que 
+$$
+v^{*}=\text{argmáx}_{v}\left\{\pi(\beta_{v},v|\boldsymbol{m},\boldsymbol{X}_{v})\right\}.
+$$
+El problema de optimización require atención en dos aspectos particulares:
+
+a. La distribución final de $v$ es dificil de calcular, pues 
+$$
+\pi(\beta_{v},v|\boldsymbol{m},\boldsymbol{X}_{v})
+\propto 
+\left\{ \int p(\boldsymbol{m}|\boldsymbol{X}_{v}'\beta_{v})  \pi(\beta_{v}|v)d_{\beta_{v}}\right\}
+\pi(v),
+$$
+
+b. es computacionalmente demandante pues el número de configuraciones en $\mathcal{I}$ puede ser significativamente grande.
+
+La implementación computacional del prolema de optimización de modelos/configuraciones en $\mathcal{I}$ puede realizarse empleando el algoritmo $\text{MC}^{3}$, el cual es un caso particular de los algoritmos *Markov chain Monte Carlo* (MCMC, por sus siglas en inglés) en el que se construye simultáneamene una cadena de Markov transdimensional $\left\{ \left(v^{(k)},\beta^{(k)}_{v}\right)\right \}_{k\geq 1}.$
+
+---
+
+# Parte 2 - Practica
+
+Ilustraremos el materia anterior en R version 3.4.3. Por favor, revisen el archivo `est46114_s08_poissonloglinear_script.R`.
+
+```{r include=FALSE}
+if(!require('bayesloglin')){install.packages("bayesloglin")}
+library("bayesloglin")
+
+if(!require('vcd')){install.packages("vcd")}
+library("vcd")
+```
+
+## Datos
+
+```{r echo=TRUE}
+musica <- c(210, 194, 170, 110,
+          190, 406, 730, 290)
+dim(musica) <- c(2, 2, 2)
+dimnames(musica) <- list(Edad = c("Adulto", "Joven"),
+                        Educacion = c("Alta", "Baja"),
+                        Escucha = c("Si", "No"))
+musica
+mosaicplot(musica)
+mosaicplot(musica, 
+           col = hcl(240),
+           main = "Gustos en Musica Clasica")
+```
+
+
+```{r}
+```
+
+## Comparación de modelos
+
+```{r}
+```
+
+## Reporte de resultados
+
+```{r}
+```
+
+---
+
+# Siguientes temas:
+
+* Estudio y definición de modelos de grafos probabilísticos.
+
+* Algoritmos e implementación bayesiana para modelos de grafos probabilísticos.
