@@ -1,0 +1,36 @@
+---
+title: "Semana 10 - Teoría de colas – Parte 2/2"
+author:
+-  Juan Carlos Martínez-Ovando
+-  jc-mo@tec.mx
+date: "Febrero-Junio 2020"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    toc_depth: 2
+    number_sections: yes
+    self_contained: yes
+    theme: cerulean
+    highlight: textmate
+fig_align: "center"
+fig_width: 18
+---
+
+# Objetivos  {.tabset .tabset-fade .tabset-pills}
+
+* Establecer las formulas del sistema de colas con mas de un servidor, bajo incertidumbre.
+
+* Solucionar el problema de numero de servidores optimo en un sistema de líneas de espera.
+
+* Presentar y justificar las soluciones encontradas en un problema practico de líneas de espera.
+
+
+---
+
+# Caso motivacion 
+
+## Objetivo de la seccion tematica
+
+* Estudiar los fundamentos matematicos, implementacion e intrepretacion del problema de seleccion de variables en el contexto de regresion.
+

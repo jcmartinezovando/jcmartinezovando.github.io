@@ -1,0 +1,35 @@
+---
+title: "Semana 09 - Teoría de colas – Parte 1/2"
+author:
+-  Juan Carlos Martínez-Ovando
+-  jc-mo@tec.mx
+date: "Febrero-Junio 2020"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    toc_depth: 2
+    number_sections: yes
+    self_contained: yes
+    theme: cerulean
+    highlight: textmate
+fig_align: "center"
+fig_width: 18
+---
+
+# Objetivos  {.tabset .tabset-fade .tabset-pills}
+
+* Describir le problema de líneas de espera, así como el uso de la teoría de colas para describir matemáticamente estos problemas.
+
+* Describir el concepto asociado con dos tipos de costos implícitos a los problemas de líneas de espera.
+
+* Describir los elementos de un sistema de colas.
+
+---
+
+# Caso motivacion 
+
+## Objetivo de la seccion tematica
+
+* Estudiar los fundamentos matematicos, implementacion e intrepretacion del problema de seleccion de variables en el contexto de regresion.
+

@@ -1,0 +1,35 @@
+---
+title: "Semana 12 - Arboles de decisión – Parte 2/3"
+author:
+-  Juan Carlos Martínez-Ovando
+-  jc-mo@tec.mx
+date: "Febrero-Junio 2020"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    toc_depth: 2
+    number_sections: yes
+    self_contained: yes
+    theme: cerulean
+    highlight: textmate
+fig_align: "center"
+fig_width: 18
+---
+
+# Objetivos  {.tabset .tabset-fade .tabset-pills}
+
+* Plantear problemas de decisiones en problemas prácticos.
+
+* Resolver problemas de decisiones empleando enfoques maximin, minmax, minmin y maxmax. Explicar la diferencia entre ellos y sus implicaciones.
+
+* Resolver problemas de decisión prácticos bajo los enfoques anteriores.
+
+---
+
+# Caso motivacion 
+
+## Objetivo de la seccion tematica
+
+* Estudiar los fundamentos matematicos, implementacion e intrepretacion del problema de seleccion de variables en el contexto de regresion.
+

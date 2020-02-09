@@ -1,0 +1,36 @@
+---
+title: "Semana 02 - Programación lineal – Parte 2/4"
+author:
+-  Juan Carlos Martínez-Ovando
+-  jc-mo@tec.mx
+date: "Febrero-Junio 2020"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    toc_depth: 2
+    number_sections: yes
+    self_contained: yes
+    theme: cerulean
+    highlight: textmate
+fig_align: "center"
+fig_width: 18
+---
+
+# Objetivos  {.tabset .tabset-fade .tabset-pills}
+
+* Describir conceptualmente el uso y elementos del método simplex.
+
+* Explicar los elementos de la tabla simplex.
+
+* Reconocer y explicar las soluciones especiales obtenidas por el método simplex.
+
+
+---
+
+# Caso motivacion 
+
+## Objetivo de la seccion tematica
+
+* Estudiar los fundamentos matematicos, implementacion e intrepretacion del problema de seleccion de variables en el contexto de regresion.
+

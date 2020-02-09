@@ -1,0 +1,35 @@
+---
+title: "Semana 13 - Arboles de decisión – Parte 3/3"
+author:
+-  Juan Carlos Martínez-Ovando
+-  jc-mo@tec.mx
+date: "Febrero-Junio 2020"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    toc_depth: 2
+    number_sections: yes
+    self_contained: yes
+    theme: cerulean
+    highlight: textmate
+fig_align: "center"
+fig_width: 18
+---
+
+# Objetivos  {.tabset .tabset-fade .tabset-pills}
+
+* Explicar la solución del problema de decisión bajo el enfoque de valor esperado.
+
+* Plantear problemas de árboles de decisión.
+
+* Presentar y justificar las soluciones encontradas en problemas de decisión en finanzas y mercadotecnia.
+
+---
+
+# Caso motivacion 
+
+## Objetivo de la seccion tematica
+
+* Estudiar los fundamentos matematicos, implementacion e intrepretacion del problema de seleccion de variables en el contexto de regresion.
+

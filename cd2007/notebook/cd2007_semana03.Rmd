@@ -1,0 +1,36 @@
+---
+title: "Semana 03 - Programación lineal – Parte 3/4"
+author:
+-  Juan Carlos Martínez-Ovando
+-  jc-mo@tec.mx
+date: "Febrero-Junio 2020"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    toc_depth: 2
+    number_sections: yes
+    self_contained: yes
+    theme: cerulean
+    highlight: textmate
+fig_align: "center"
+fig_width: 18
+---
+
+# Objetivos  {.tabset .tabset-fade .tabset-pills}
+
+* Plantear y explicar el dual de un problema de programación lineal.
+
+* Describir e implementar análisis de sensibilidad en un problema que involucre el método de programación lineal.
+
+* Identificar y explicar las situaciones típicas que pueden resolverse empleando el análisis de sensibilidad. 
+
+
+---
+
+# Caso motivacion 
+
+## Objetivo de la seccion tematica
+
+* Estudiar los fundamentos matematicos, implementacion e intrepretacion del problema de seleccion de variables en el contexto de regresion.
+
