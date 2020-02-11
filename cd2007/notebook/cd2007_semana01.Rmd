@@ -27,7 +27,7 @@ fig_width: 18
 
 ---
 
-# Motivating case study
+# **Motivating case study**
 
 **A resource allocation problem**
 
@@ -90,7 +90,20 @@ c. **Constraints** related to the $n$ decision variables. These constraints are 
 
 > The **optimization rule** consist in `maximizing (or minimizing)` the `objective function` with regards to the $n$ `decision variables` subject to the given constraints.
 
-## Example: Motivating case study
+## Remarks
+
+Recall that in **linear programming**:
+
+a. Both `objetive function` & `constraints` **must all be linear**
+
+b. Typically, `objetive variables` are all possitive.
+
+c. If `objective variables` are integers, then the problem turns into **Integer Programme (IP)**, which is far more challenging.
+
+
+---
+
+# Example: **Motivating case study**
 
 Lets consider **two decision variables**, $x_1$ and $x_2$, and an **objetvice function** given by 
 $$
@@ -106,20 +119,55 @@ x_1 & \geq & 0 \nonumber \\
 x_2 & \geq & 0. \nonumber
 \end{eqnarray}
 
-## Remarks
 
-Recall that in **linear programming**:
+## Analytic solution
 
-a. Both `objetive function` & `constraints` **must all be linear**
+## Graphical soluction
 
-b. Typically, `objetive variables` are all possitive.
+### First constraint
 
-c. If `objective variables` are integers, then the problem turns into **Integer Programme (IP)**, which is far more challenging.
+\begin{eqnarray}
+x_1 + x_2 & \leq & 200 \nonumber \\
+\end{eqnarray}
+
+![Layout of the first constraint](./figures/cd2007_week1_const1.png)
+
+### First + second constraint
+
+\begin{eqnarray}
+x_1 + x_2 & \leq & 200 \nonumber \\
+9 x_1 + 6 x_2 & \leq & 1566 \nonumber \\
+\end{eqnarray}
+
+![Layout of the first + second constraints](./figures/cd2007_week1_const1+2.png)
+
+### First + second + third constraint
+
+\begin{eqnarray}
+x_1 + x_2 & \leq & 200 \nonumber \\
+9 x_1 + 6 x_2 & \leq & 1566 \nonumber \\
+12 x_1 + 16 x_2 & \leq & 2880 \nonumber \\
+\end{eqnarray}
+
+![Layout of the first + second + third constraints](./figures/cd2007_week1_const1+2+3.png)
+
+### Over imposing the `objetive function`
+
+\begin{eqnarray}
+f(x_1,x_2) = 350 x_1 + 300 x_2 & \leq & 200
+\end{eqnarray}
+
+![Layout over impossing the objctive function at $f(x_1,x_2)=35,000$](./figures/cd2007_week1_const1+2+3+of.png)
 
 
----
+![Layout over impossing the objctive function  at $f(x_1,x_2)=52,500$](./figures/cd2007_week1_const1+2+3+of2.png)
 
-# Modelación y resolción de problemas simples
+## Optimal Solution
+
+The **optimal solution** is reached at $52,500$
+
+![Layout over impossing the objctive function  at $f(x_1,x_2)=52,500$](./figures/cd2007_week1_const1+2+3+of_opt.png)
+
 
 ---
 
@@ -127,10 +175,10 @@ c. If `objective variables` are integers, then the problem turns into **Integer 
 
 ---
 
-# Lecturas de soporte
+# Supporting readings
 
 ---
 
-# Lecturas para la siguiente semana
+# Next week preparation readings
 
 
