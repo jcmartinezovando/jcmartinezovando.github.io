@@ -1,9 +1,9 @@
 ---
-title: "Semana 01 - Programación lineal – Parte 1/4 "
+title: "Week 01 - Linear programme – Part 1/4 "
 author:
 -  Juan Carlos Martínez-Ovando
 -  jc-mo@tec.mx
-date: "Febrero-Junio 2020"
+date: "Feb-Jun 2020"
 output:
   html_document:
     toc: true
@@ -17,511 +17,120 @@ fig_align: "center"
 fig_width: 18
 ---
 
-# Objetivos  {.tabset .tabset-fade .tabset-pills}
+# Objetives  {.tabset .tabset-fade .tabset-pills}
 
-* Describir conceptualmente en que situaciones puede aplicarse el método de programación lineal, y en que consiste esta herramienta cuantitativa.
+* Conceptually describe in what situations the linear programming method can be applied, and what this quantitative tool consists of.
 
-* Describir las etapas generales a seguir en las soluciones de problemas de programación lineal.
+* Describe the general steps to follow in solving linear programming problems.
 
-* Determinar los elementos prácticos necesarios para implementar una solución con el método de programación lineal.
+* Determine the practical elements necessary to implement a solution with the linear programming method.
 
 ---
 
-# Caso motivacion 
+# Motivating case study
 
-## Objetivo de la seccion tematica
+**A resource allocation problem**
 
-* Estudiar los fundamentos matematicos, implementacion e intrepretacion del problema de seleccion de variables en el contexto de regresion.
+A company produces copper cable of 5 and 10 mm of diameter on a
+single production line with the following constraints:
 
-* Entender que el problema de seleccion de variables involucra un problema de comparacion de modelos.
+a.  The available copper allows to produces 21000 meters of cable of
+5 mm diameter per week.
 
-* Entender las soluciones en dos contextos inferenciales: frecuentista y bayesiano.
+b. A meter of 10 mm diameter copper consumes 4 times more copper than a meter of 5 mm diameter copper.
 
-## Plan tematico
+Due to demand, the weekly production of 5 mm cable is limited to
+$15,000$ meters and the production of 10 mm cable should not exceed
+40 percent of the total production. Cable are respectively sold 50 and 200 EUR the meter.
 
-Dividiremos el estudio de este problema en tres partes:
+> Question: **What should the company produce in order to maximize its weekly revenue?**
 
-1. Comparacion y seleccion de modelos
+## Some other examples
 
-2. Seleccion de variables en el contexto de regresion 
+> Let us take a few minutes to formulate similar to the `motivating case study` based in our everyday life.
 
-3. Seleccion de variables en el contexto de regresion binaria (y modelos lineales generalizados, en general)
+---
 
-> **Todo esto con miras a enternder el problema y poder resolver el en contexto de analisis de datos categoricos, como veremos adelante en el curso.**
+# Introduction to **optimization**
 
-## Objetivo de la sesion
+## Montivation
 
-* Entender el planteamiento y solucion del problema de comparacion y seleccion de modelos.
+Why **linear programming** is a very important topic?
+
+* A lot of problems can be formulated as linear programmes.
+
+* Nowadays, here exist efficient methods to solve them -- or at least give good approximations--.
+
+## What is a **linear programm**?
+
+It is an *optimization problem* consisting in
+
+a. maximizing (or minimizing) a `linear objective` function of $n$ decision variables
+
+b. subject to a set of constraints expressed by linear equations or
+inequalities.
+
+## History
+
+It was originated within a military context: 
+
+> `programme` = `resource planning`
+
+The terminology is due to *George B. Dantzig*, inventor of the Simplex
+Algorithm (1947), developed during WWII and published right afterwards.
+
+## Terminology
 
 
+a. **Decision variables** are denoted by $x_1,x_2,\ldots,x_n$.
 
-# Comparacion de modelos  {.tabset .tabset-fade .tabset-pills}
+b. **Objetive function** mapping $\Re^n\rightarrow \Re$ in a linear way.
 
-## Contexto
+c. **Constraints** related to the $n$ decision variables. These constraints are typically expressed in the form of linear inequalities.
 
-Estudiaremos el problema de comparacion de modelos en un contexto general.
+> The **optimization rule** consist in `maximizing (or minimizing)` the `objective function` with regards to the $n$ `decision variables` subject to the given constraints.
 
-Para esto, consideremos:
+## Example: Motivating case study
 
-a. $Y$ es una variable generica para la cual podemos acceder a un conjunto de $\text{datos}=\{y_1,\ldots, y_n\}$
-
-b. el desconocimiento acerca de $Y$ es drescrito por $M$ **modelos alternativos**, siendo 
+Lets consider **two decision variables**, $x_1$ and $x_2$, and an **objetvice function** given by 
 $$
-\mathcal{P} = 
-\{P_1,\ldots,P_M\},
+f(x_1,x_2)=350 x_1 + 300 x_2.
 $$
-la coleccion de modelos, y 
-$$
-P_m=\{f_m(y|\theta_m): \theta_m\in\Theta_m\},
-$$
-donde $f_m()$ denota un modelo de probabilidad con una estructura particular para el modelo $m$, y $\theta_m$ su correspondiente parametro.
+The **optimization rule** consists in *maximizing* $f(x_1,x_2)$ subjet to the following constraints:
 
-## Observaciones
-
-En un contexto general, podemos considerar que los modelos en $\mathcal{P}$ pueden ser de dos tipos:
-
-1. **Anidados:-** Cuando los $f_m(y|\theta_m)=f(y|\theta_m)$, para todo $m$; *i.e.* todos los modelos en $\mathcal{P}$ tienen la ***misma forma estructural, difiriendo en sus parametros*
-
-2. **No anidados:-** Cuando los modelos $f_m(y|\theta_m)$ son estructuralmente distintos para diferentes $m$.
-
-## Ejemplos
-
-1. **Anidados:-** En el contexto de regresion, podemos pensar en que $Y$ este relacionada con una coleccion $m$ de covariables, 
-$$
-X_1^{(m)},\ldots,X^{(m)}_{p^{(m)}},
-$$
-seleccionadas de entre un conjunto 
-$$
-X_1,\ldots,X_p
-$$ de posibles covariables, con
-$$
-p^{(m)}<p.
-$$
-
-En este caso, bajo el supuesto de normalidad, tendriamos que 
-$$
-f(y|\boldsymbol{x}^{(m)},\theta_m) = 
-\text{N}(y|\mu_{x,m},\sigma_m^2)
-$$
-donde 
-$$
-\mu_{x,m}=\theta_m'\boldsymbol{x}^{(m)},
-$$
-para $m=1,\ldots,M$.
-
-2. **No anidados:-**
-
-Pensemos que $M=2$ y que $Y$ toma valores en la recta real, entonces $\mathcal{P}$ contemplaria dos alternativas,
 \begin{eqnarray}
-P_1: & Y\sim & \text{N}(y|\mu,\sigma^2)\nonumber \\ 
-P_2: & Y\sim & \text{Ca}(y|\mu,\gamma).\nonumber.  
+x_1 + x_2 & \leq & 200 \nonumber \\
+9 x_1 + 6 x_2 & \leq & 1566 \nonumber \\
+12 x_1 + 16 x_2 & \leq & 2880 \nonumber \\
+x_1 & \geq & 0 \nonumber \\
+x_2 & \geq & 0. \nonumber
 \end{eqnarray}
 
-En este caso, los parametros son
-\begin{eqnarray}
-\theta_1 & = & (\mu,\sigma^2)\nonumber \\ 
-\theta_2 & = & (\mu,\gamma).\nonumber
-\end{eqnarray}
+## Remarks
 
-# Ilustracion   {.tabset .tabset-fade .tabset-pills}
+Recall that in **linear programming**:
 
-Consideramos el caso de **modelos no anidados** para $\mathcal{P}$.
+a. Both `objetive function` & `constraints` **must all be linear**
 
-## Datos simulados
-Consideremos que 
-$$
-y_1,\ldots,y_n,
-$$
-son datos simulados de tres tipos de distribuciones:
-\begin{eqnarray}
-P_1: & Y\sim &\text{N}(y|0,\tau^2)\nonumber \\
-P_2: & Y\sim & \text{t}_{\nu}(y|0,\tau^2)\nonumber \\ 
-P_3: & Y\sim & \text{Mix-N}(y|0,w,1,\tau^2)\nonumber 
-\end{eqnarray}
+b. Typically, `objetive variables` are all possitive.
 
-Generamos una bandera de identificacion, para el origen de los datos, por cuestiones de control.
+c. If `objective variables` are integers, then the problem turns into **Integer Programme (IP)**, which is far more challenging.
 
-```{r}
-true.model="gaussian"
-#true.model="student"
-true.model
-```
 
-Desplegamos los datos simulados del modelo $P_1$ (`modelo gaussiano`). La variable $n$ denota el numero de datos simulados.
+---
 
-```{r}
-if(!require('invgamma')){install.packages("invgamma")}
-library("invgamma")
+# Modelación y resolción de problemas simples
 
-set.seed(1)
-true.model="gaussian"
-#true.model="student"
-n <- 100
-tau2.true <- 3
-nu.true <- 3
-if(true.model=="gaussian"){
-  x <- rnorm(n,0,sqrt(tau2.true))
-}else{
-  x <- sqrt(tau2.true)*rt(n,df=nu.true)
-}
-sumx2 = sum(x^2)
+---
 
-if (true.model=="gaussian"){
-  par(mfrow=c(1,2))
-  ts.plot(x,main=paste("Datos: N(0,",tau2.true,")",sep=""))
-  hist(x,main="",prob=TRUE)
-}else{
-  par(mfrow=c(1,2))
-  ts.plot(x,main=paste("Datos: Student's t(0,",tau2.true,",",nu.true,")",sep=""))
-  hist(x,main="",prob=TRUE)
-}
-```
+# Modelación de problemas combinatorios
 
-## Aprendizaje en P.1
+---
 
-En el caso en que los datos,
-$$
-y_1,\ldots,y_n,
-$$ 
-tengan asociadas variables aleatorias `iid`, con 
-$$
-Y\sim \text{N}(y|0,\tau^2),
-$$
-donde
-$$
-\tau^2 \sim \text{GaI}(c0,d0),
-$$
-con $c0$ y $d0$ `hiperparametros` conocidos (inducidos por `informacion suplementaria`).
+# Lecturas de soporte
 
-**En este caso, el parametro $\theta_1=(\tau^2)$ solamente.**
+---
 
-* En partcular, esperificaremos $d_0=c_0+1$, de manera que la `moda suplementaria` para $\tau^2$ sea igual a $1$
+# Lecturas para la siguiente semana
 
-* El valor $c0=4$ corresponde a `informacion suplementaria no informativa`, con desviaciones en el orden $1.2$.
 
-**Nota:-** Recordemos que $\mathbb{E}_{\text{GaI}}(\tau^2)=d0/(c0-1)$, y $\text{moda}(\tau^2)=d_0/(c_0+1)$, con $\text{var}(\tau^2)=d_0^2/(c_0-1)^2(c_0-2))$.
-
-**MLE:-** Es relativamente sencillo de obtener que 
-$$
-\hat{\tau}^2_{mle}=\sum_{i=1}^n y_i^2/n,
-$$
-corresponde al `estimador puntual muestral (datos)` de $\tau^2$.
-
-```{r}
-tau2.mle <- sumx2/n
-tau2.mle
-
-N <- 1000
-tau2s <- seq(0.001,20,length=N)
-like <- (2*pi*tau2s)^(-n/2)*exp(-0.5*sumx2/tau2s)
-
-c0 <- 4
-d0 <- c0+1
-prior <- dinvgamma(tau2s,c0,d0)
-
-logpred.model1 <- log(sum(like*prior*(tau2s[2]-tau2s[1])))
-logpred.model1 
-
-c1 <- c0+n/2
-d1 <- d0+sumx2/2
-posterior <- dinvgamma(tau2s,c1,d1)
-
-tau2.mode1 = d1/(c1+1)
-tau2.mode1 
-
-par(mfrow=c(1,3))
-plot(tau2s,like/max(like),xlab=expression(tau^2),ylab="Likelihood",type="l")
-title("Modelo P_1: Gaussiano")
-plot(tau2s,prior,xlab=expression(tau^2),ylab="Prior",type="l")
-plot(tau2s,posterior,xlab=expression(tau^2),ylab="Posterior",type="l",lwd=3)
-lines(tau2s,prior,col=2,lwd=3)
-legend("topright",legend=c("prior","posterior"),col=2:1,lty=1,lwd=3)
-```
-
-
-## Aprendizaje en P.2
-
-en este caso, suponemos que
-$$
-x_1,\ldots,x_n
-$$
-tienen asociadas variables aleatorias `iid`, con
-$$
-Y\sim \text{t}_{\nu}(0,\tau^2),
-$$
-donde 
-$$\tau^2 \sim \text{Gai}(e0,f0),
-$$
-con $e0$ y $f0$ `hiperparametros suplementarios` conocidos.
-
-* En particular, consideraremos $f0=e0+1$, de manrea que `suplementariamente` la moda de $\tau^2$ sea igual a $1$.
-
-* El parameto $e0=4$ define una `informacion suplementaria vaga/no informativa`, con una desviacion estandar sercana a $1.2$.
-
-* Para $\nu$, empleamos una version discretizada propuesta por Juarez & Steel (2010), con $k=10$, i.e. 
-$$
-p(\nu) \propto 2 k \nu/((\nu+k)^3),$$ 
-para 
-$$
-\nu \in \{1,\cdots,50\}.
-$$
-
-```{r fig.width=12,fig.height=4}
-e0 <- 4
-f0 <- e0+1
-numax <- 50
-N <- 100
-tau2s <- seq(0.001,20,length=N)
-nus <- 1:numax
-
-k <- 10
-
-like <- matrix(0,N,numax)
-prior <- matrix(0,N,numax)
-normnu <- sum(2*k*nus/((nus+k)^3))
-i <- 1
-for(i in 1:N){
-  for(j in 1:numax){
-    like[i,j] <- prod(dt(x/sqrt(tau2s[i]),nus[j])/sqrt(tau2s[i]))
-    prior[i,j] <- dinvgamma(tau2s[i],e0,f0)*2*k*nus[j]/((nus[j]+k)^3)/normnu
-  }
-}
-
-logpred.model2 <- log(sum(like*prior*(tau2s[2]-tau2s[1])*(nus[2]-nus[1])))
-logpred.model2
-
-like <- like/max(like)  
-post <- prior*like
-
-par(mfrow=c(1,3))
-contour(tau2s,nus,like,xlab=expression(tau^2),ylab=expression(nu),drawlabels=FALSE)
-title("Verosimilitud model P_2: Student's t")
-contour(tau2s,nus,prior,xlab=expression(tau^2),ylab=expression(nu),drawlabels=FALSE)
-title("Prior")
-contour(tau2s,nus,post,xlab=expression(tau^2),ylab=expression(nu),drawlabels=FALSE)
-title("Posterior")
-     
-ind=1:N      
-tau2.mode2 = tau2s[ind[apply(post==max(post),1,sum)==1]]
-ind=1:numax
-nu.mode2 = nus[ind[apply(post==max(post),2,sum)==1]]
-
-c(tau2.mode2,nu.mode2)      
-```  
-
-## Aprendizaje en P.3
-
-En este caso, suponemos que, 
-$$
-y_1,\ldots,y_n,
-$$
-tienen asociadas variables aleatorias `iid`, con distribucion dada por la mezcla de dos distribuciones gaussianas,
-$$
-f_3(y|w,1,\tau^2)=w \text{N}(y|0,1)+(1-w)\text{N}(y|0,\tau^2),
-$$
-con 
-$$
-\tau^2 \sim \text{GaI}(a0,b0),
-$$
-con $a0$ y $b0$ `hiperparametros suplementarios` conocidos.
-
-* Definimos, en este caso, $b0=a0+1$ de manera que la `moda suplementaria` sea igual a $1$, y
-
-* El parametro $a0=4$ define una `informacion suplementaria vaga/no informativa` con desviacion estandar cercaca a $1.2$. 
-
-* Suponemos que $w$ varia uniformemente en el conjunto discreto: 
-$$
-\{0,0.01,0.02,\ldots,1.0\}.
-$$
-
-```{r fig.width=12,fig.height=4}
-a0 <- 4
-b0 <- a0+1
-N <- 100
-tau2s <- seq(0.001,20,length=N)
-ws <- seq(0,1,length=N)
-like <- matrix(0,N,N)
-prior <- matrix(0,N,N)
-i <- 1
-for (i in 1:N){
-  j <- 1 
-  for (j in 1:N){
-    like[i,j] <- prod(ws[j]*dnorm(x)+(1-ws[j])*dnorm(x,0,sqrt(tau2s[i])))
-    prior[i,j] <- dinvgamma(tau2s[i],a0,b0)*(1/N)
-  }
-}
-
-logpred.model3 <- log(sum(like*prior*(tau2s[2]-tau2s[1])*(ws[2]-ws[1])))
-logpred.model3
-
-like <- like/max(like)  
-post <- prior*like
-
-par(mfrow=c(1,3))
-contour(tau2s,ws,like,xlab=expression(tau^2),ylab=expression(w),drawlabels=FALSE)
-title("Verosimilitud para el modelo P_3: Mixture of Gaussians")
-contour(tau2s,ws,prior,xlab=expression(tau^2),ylab=expression(w),drawlabels=FALSE)
-title("Prior")
-contour(tau2s,ws,post,xlab=expression(tau^2),ylab=expression(w),drawlabels=FALSE)
-title("Posterior")
-     
-ind=1:N      
-tau2.mode3 = tau2s[ind[apply(post==max(post),1,sum)==1]]
-w.mode3    = ws[ind[apply(post==max(post),2,sum)==1]]
-c(tau2.mode3,w.mode3)
-```
-
-## Comparacion de modelos
-
-Habiendo estimado los tres modelos con los `mismos datos`, $y_1\ldots,y_n$, podemos **comparar los tres modelos entre si**, con base en su `adecuacion` con los `datos` a traves del **factor de Bayes (o Bayes factor, BF).**
-
-```{r fig.width=10,fig.height=6}
-logpreds <- c(logpred.model1,logpred.model2,logpred.model3)
-post.model <- round(exp(logpreds)/sum(exp(logpreds)),5)
-
-xxx <- seq(-10,10,length=1000)
-if (true.model=="gaussian"){
-  den.true <- dnorm(xxx,0,sqrt(tau2.true))
-}else{
-  den.true <- dt(xxx/sqrt(tau2.true),df=nu.true)/sqrt(tau2.true)
-}
-den1 <- dnorm(xxx,0,sqrt(tau2.mode1))
-den2 <- dt(xxx/sqrt(tau2.mode2),df=nu.mode2)/sqrt(tau2.mode2)
-den3 <- w.mode3*dnorm(xxx)+(1-w.mode3)*dnorm(xxx,0,sqrt(tau2.mode3))
-ltrue <- log(den.true)
-lden1 <- log(den1)
-lden2 <- log(den2)
-lden3 <- log(den3)
-
-par(mfrow=c(1,1))
-plot(xxx,den.true,type="l",ylab="Densidad",xlab="x",ylim=range(den.true,den1,den2,den3),lwd=3)
-lines(xxx,den1,col=2,lwd=3)
-lines(xxx,den2,col=3,lwd=3)
-lines(xxx,den3,col=4,lwd=3)
-if(true.model=="gaussian"){
-  legend("topleft",legend=c(
-paste("Datos: N(0,",tau2.true,")",sep=""),
-paste("P.1: Gaussiana (",round(logpred.model1,3),")",sep=""),
-paste("P.2: Student's t (",round(logpred.model2,3),")",sep=""),
-paste("P.3: Mezcla de Gaussiana (2) (",round(logpred.model3,3),")",sep="")),col=1:4,lty=1,lwd=3)
-}else{
-  legend("topleft",legend=c(
-paste("Datos: Student's t(0,",tau2.true,",",nu.true,")",sep=""),
-paste("P.1: Gaussian (",round(logpred.model1,3),")",sep=""),
-paste("P.2: Student's t (",round(logpred.model2,3),")",sep=""),
-paste("P.3: M2 Gaussians (",round(logpred.model3,3),")",sep="")),col=1:4,lty=1,lwd=3)
-}
-legend("topright",legend=c(
-paste("Prob.1 = ",post.model[1],sep=""),
-paste("Prob.2 = ",post.model[2],sep=""),
-paste("Prob.3 = ",post.model[3],sep="")),col=2:4,lty=1,lwd=3)
-
-
-par(mfrow=c(1,1))
-plot(xxx,ltrue,type="l",ylab="Log-densidad",xlab="x",ylim=range(ltrue,lden1,lden2,lden3),lwd=3)
-lines(xxx,lden1,col=2,lwd=3)
-lines(xxx,lden2,col=3,lwd=3)
-lines(xxx,lden3,col=4,lwd=3)
-```
-
-# Modelo de regresión  {.tabset .tabset-fade .tabset-pills}
-
-## Caso univariado (regresion multiple)
-
-En este caso, la variable de respuesta es escalar, i.e. $Y\in \Re$, y $X=(X_1,\ldots,X_p)$ con $p$ variables explicativas (covariables), de tal forma que 
-
-$$
-Y|X=x \sim N(y|x'\beta,\sigma)
-$$
-es la distribucion condicional donde 
-$$
-\mathbb{E}(Y|x)=x'\beta.
-$$
-
-## Observaciones
-
-Cuando tenemos varias observaciones, $i=1,\ldots,n$, el modelo es expresado como
-$$
-Y_i|X_i=x_i \sim N(y|x_i'\beta,\sigma),
-$$
-o equivalentemente en su forma matricial como
-$$
-\boldsymbol{Y}|\boldsymbol{X}=\boldsymbol{x} \sim N_n\left(y|\boldsymbol{X}'\beta,\sigma\boldsymbol{I}\right).
-$$
-
-## Aprendizaje estadistico
-
-Cuando trabajamos con el modelo de regresion multiple, la _identificacion_ o _estimacion_ de $\beta$, obtenida mediante el paradigma frecuentista o bayesiano, se basa en encontrar el valor de $\beta$ que maximice (en cierta forma) la verosimilutid 
-$$
-\text{lik}
-\left(\beta,\sigma|\boldsymbol{y},\boldsymbol{X}\right) 
-\propto 
-\sigma^{-n/2}
-\exp\left\{-\frac{1}{2 \sigma}(\boldsymbol{y}-\boldsymbol{X}'\beta)'(\boldsymbol{y}-\boldsymbol{X}'\beta)\right\},
-$$
-o, equivalentemente, mediante la minimizacion de una funcion de perdida asociada (errores cuadraticos, es el caso general), i.e.
-$$
-\text{L}
-\left(\beta,\sigma|\boldsymbol{y},\boldsymbol{X}\right) 
-\propto 
-\exp \left\{(\boldsymbol{y}-\boldsymbol{X}'\beta)' (\boldsymbol{y}-\boldsymbol{X}'\beta)\right\},
-$$
-en cuyo caso tenemos varios resultados para $\beta$.
-
-## Casos relevantes
-
-a. Cuando $n>>p$ y $\boldsymbol{X}$ de dimension $n\times p$ es de **rango completo** (i.e. ninguna columna es una combinacion lineal de las otras), entonces el estimados de $\beta$ estara en funcion de 
-$$
-(\boldsymbol{X}'\boldsymbol{X})^{-1}\boldsymbol{X}'\boldsymbol{y},
-$$
-dependiendo del paradigma inferencia adoptado.
-
-b. Cuando $n>>p$ pero $\boldsymbol{X}$ de dimension $n\times p$ no es o casi no es de **rango completo** (i.e. una o varias columnas son combinaciones lienales de otras, o casi una o varias columnas son combinaciones lineales de las restantes, respectivamente), entonces $(\boldsymbol{X}'\boldsymbol{X})^{-1}$ no existe de manera **unica**, por lo que varios valores estimadores de $\beta$ existiran, y de hehco varios valores de $\beta_j$s seran redundantes (i.e. cercanos a cero o con varianzas extraordinariamente grandes).
-
-c. Cuando $p>n$ tendremos que tratarlo particularmente... (mas adelante en el curso, con relaci\'on al modelo `FA`).
-
-## Seleccion de variables
-
-Cuando $Y$ es la variable de respuesta, estaremos interesados en encontras una `seleccion/subgrupo ad-hoc` de `todas` las covariables disponibles,
-$$
-X_1,\ldots,X_p,
-$$
-que sea particularmente relevante para describir la variabilidad en $Y$.
-
-> Incluir todas las $p$ covariables puede distorcionar la relacion (en terminos del aprendizaje estadistico).
-
-Veremos en la siguiente sesion que podemos crear `sub-grupos` de covariables
-$$
-X^{(m)}_1,\ldots,X^{(m)}_{p_m},
-$$
-para 
-$$
-m=1,\ldots,M,
-$$
-con 
-$$
-M=2^p.
-$$
-
-> No siempre consideraremos las $2^p$ combinaciones, i.e. 
-$$
-M \leq 2^p.
-$$
-
-> El numero de subselecciones puede ser extenuante cuand $p$ es `grande`. Cuidado!!!
-
-Cada `subgrupo de covariables`, $m$, definira un `modelo anidado` de regresion,
-donde 
-$$
-Y|X^{(m)}_1,\ldots,X^{(m)}_{p_m} \sim \text{N}(y|\theta_m'\boldsymbol{x}^{(m)},\tau_m^2).
-$$
-
-**El proposito, sera el definir un `procedimiento automatizado` para identificar cual `subgrupo de covariables` es mas informativo para $Y$.**
-
-# Comentarios   {.tabset .tabset-fade .tabset-pills}
-
-* El **BF** es una medida de comparacion de modelos `1 a 1`. Sin embargo, es utila para comparar varios modelos entre si, estableciendo todas las comparaciones `1 a 1` posibles.
-
-* La felxibilidad del **BF** reside en que no restringe que la forma estructural de los modelos sea la misma en $\mathcal{P}$.
-
-* Se ha empleado con bastante exito para comparar y seleccionar **modelos anidados**. Esto lo veremos, en particular, en el contexto de `seleccion de variables en regresion`.
