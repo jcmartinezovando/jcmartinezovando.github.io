@@ -120,9 +120,13 @@ x_2 & \geq & 0. \nonumber
 \end{eqnarray}
 
 
-## Analytic solution
-
 ## Graphical soluction
+
+* The constraints of a linear programme define a zone of solutions.
+
+* The best point of the zone corresponds to the optimal solution.
+
+* For problem with 2 variables, easy to draw the zone of solutions and to find the optimal solution graphically.
 
 ### First constraint
 
@@ -162,23 +166,119 @@ f(x_1,x_2) = 350 x_1 + 300 x_2 & \leq & 200
 
 ![Layout over impossing the objctive function  at $f(x_1,x_2)=52,500$](./figures/cd2007_week1_const1+2+3+of2.png)
 
-## Optimal Solution
-
+### Optimal Solution
 The **optimal solution** is reached at $52,500$
 
 ![Layout over impossing the objctive function  at $f(x_1,x_2)=52,500$](./figures/cd2007_week1_const1+2+3+of_opt.png)
 
 
+## Analytic solution
+
+The computation of the optimal solution requires the **identification** of the intersection of the constraints, i.e.
+\begin{eqnarray}
+x_1+x_2 & = &  200 \nonumber \\
+9x_1+6x_2 & = &  1566 \nonumber
+\end{eqnarray}
+
+Thus, we get that
+\begin{eqnarray}
+x^*_1 & = & 122 \nonumber \\
+x^*_2 & = & 78, \nonumber
+\end{eqnarray}
+for which
+$$
+f(x^*_1,x^*_2) = 66,100.
+$$
+
+# Remarks
+
+Optimal solutions to **linear programme** problems might turn into the follow types:
+
+![Types of optimal solutions](./figures/cd2007_week1_opt_types.png)
+
+a. A **single** optimal solution.
+
+b. An **infinite number** of optimal solution.
+
+c. **No optimal** solution, at all.
+
+> If an optimal solution exists, there is always a **corner point** optimal solution!
+
 ---
 
-# Modelación de problemas combinatorios
+# **Solving** linear programmes
+
+> I. The constraints of an LP give rise to a geometrical shape: a **polyhedron**.
+
+> II. If we can determine **all the corner points** of the polyhedron, then we calculate the objective function at these points and take the best one as our optimal solution.
+
+> III. The **Simplex Method** intelligently moves from corner to corner until it can prove that it has found the optimal solution.
+
+## Notes
+
+* Geometric method impossible in higher dimensions
+
+* Algebraical methods: **Simplex method** skim through the feasible solution polytope. Similar to a "Gaussian elimination". Very good in practice, but can take an exponential time.
+
+* Polynomial methods exist: **ellipsoid method**. But more theoretical than practical.
+
+## Integer programme
+
+* Feasible region: a set of discrete points.
+
+* Corner point solution not assured.
+
+* No "efficient" way to solve an IP.
+
+* Solving it as an LP provides a relaxation and a bound on the solution.
+
+# **Little-big-insignificant details**
+
+## Difficulty: Large number of solutions.
+
+* `Choose the best solution` among $2n$ or $n!$ possibilities: *all solutions cannot be enumerated*
+
+* `Complexity of studied problems`: often NP-complete.
+
+## Solving methods:
+
+* Optimal solutions:
+
+ - Graphical method (2 variables only).
+
+ - Simplex method.
+
+* Approximations:
+
+ - Theory of duality (assert the quality of a solution).
+
+ - Approximation algorithms.
 
 ---
-
-# Supporting readings
-
 ---
 
-# Next week preparation readings
+# To be **remembered**
 
+a. What is a linear programme.
 
+b. The graphical method of resolution.
+
+c. Linear programs can be solved efficiently (polynomial).
+
+* **Why integer programs** are so harder (in general no polynomial algorithms). *In this case, we look for approximate solutions.*
+
+# Steps for **modelling in practice**
+
+1. Defining the Problem
+
+2. Developing a Model
+
+3. Acquiring Input Data
+
+4. Developing a Solution
+
+5. Testing the Solution
+
+6. Analyzing the Results
+
+7. Implementing the Results
