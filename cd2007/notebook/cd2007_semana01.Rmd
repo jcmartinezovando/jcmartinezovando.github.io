@@ -51,6 +51,24 @@ $15,000$ meters and the production of 10 mm cable should not exceed
 
 ---
 
+# Steps for **modelling in practice**
+
+1. **Defining the Problem**
+
+2. **Developing a Model**
+
+3. **Acquiring Input Data**
+
+4. **Developing a Solution**
+
+5. **Testing the Solution**
+
+6. **Analyzing the Results**
+
+7. **Communicating the Solution and Results**
+
+8. **Implementing the Results**
+
 # Introduction to **optimization**
 
 ## Montivation
@@ -269,16 +287,18 @@ c. Linear programs can be solved efficiently (polynomial).
 
 # Steps for **modelling in practice**
 
-1. Defining the Problem
+1. **Defining the Problem**
 
-2. Developing a Model
+2. **Developing a Model**
 
-3. Acquiring Input Data
+3. **Acquiring Input Data**
 
-4. Developing a Solution
+4. **Developing a Solution**
 
-5. Testing the Solution
+5. **Testing the Solution**
 
-6. Analyzing the Results
+6. **Analyzing the Results**
 
-7. Implementing the Results
+7. **Communicating the Solution and Results**
+
+8. **Implementing the Results**
