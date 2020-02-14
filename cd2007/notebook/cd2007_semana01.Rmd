@@ -29,21 +29,20 @@ fig_width: 18
 
 # **Motivating case study**
 
-**A resource allocation problem**
+> **A resource allocation problem**
 
-A company produces copper cable of 5 and 10 mm of diameter on a
-single production line with the following constraints:
+A company produces copper cable of 5 and 10 mm of diameter on *a
+single production line* with the following constraints:
 
-a.  The available copper allows to produces 21000 meters of cable of
-5 mm diameter per week.
+The production capacity of the company allows to produce up to 104.4 meters --under the assumtion of having a linear production line of both cables produced--. The company must produce 10mm diameter cable in a 60 percent proportion, with respect to the producion ot 5mm diameter cable.
 
-b. A meter of 10 mm diameter copper consumes 4 times more copper than a meter of 5 mm diameter copper.
+Product distribution consideration allow the company to produce at most 200 meters of both types of cable combined, since it is now allowed to store the excedent of cable not distributed within the week.
 
-Due to demand, the weekly production of 5 mm cable is limited to
-$15,000$ meters and the production of 10 mm cable should not exceed
-40 percent of the total production. Cable are respectively sold 50 and 200 EUR the meter.
+Due to demand, the market can take up to 102.8571 meters of both types of cables, among which 42.85714 percent must be of 10 mm diameter cable, and 57.14286 percent of 5mm diameter cable.
 
-> Question: **What should the company produce in order to maximize its weekly revenue?**
+Both cables are respectively sold at 350 and 200 EUR the meter.
+
+> Question: **What amount of meters must the company produce of both types of cables in order to maximize its weekly revenue?**
 
 ## Some other examples
 
@@ -123,12 +122,31 @@ c. If `objective variables` are integers, then the problem turns into **Integer 
 
 # Example: **Motivating case study**
 
-Lets consider **two decision variables**, $x_1$ and $x_2$, and an **objetvice function** given by 
+Lets consider **two decision variables**, 
+* $x_1$ - meters of 10mm cable, and 
+* $x_2$ - meters of 5mm cable, 
+
+and an **objetvice function** given by 
 $$
 f(x_1,x_2)=350 x_1 + 300 x_2.
 $$
-The **optimization rule** consists in *maximizing* $f(x_1,x_2)$ subjet to the following constraints:
 
+> The **optimization rule** consists in *maximizing* $f(x_1,x_2)$, i.e. finding such that
+$$
+(x_1^*, x_2^*)
+ = 
+ \arg\max_{(x_1,x_2)\in \mathbb{R}^{2}} f(x_1,x_2),
+$$
+subjet to the follow collection of **constraints**:
+\begin{eqnarray}
+x_1 + x_2 & \leq & 200 \nonumber \\
+0.6 x_1 + 0.4 x_2 & \leq & 104.4 \nonumber \\
+0.4285714 x_1 + 0.5714286 x_2 & \leq & 102.8571 \nonumber \\
+x_1 & \geq & 0 \nonumber \\
+x_2 & \geq & 0. \nonumber
+\end{eqnarray}
+
+> Alternatively, the constrainst cabe expressed as follows:
 \begin{eqnarray}
 x_1 + x_2 & \leq & 200 \nonumber \\
 9 x_1 + 6 x_2 & \leq & 1566 \nonumber \\

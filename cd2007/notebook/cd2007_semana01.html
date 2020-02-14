@@ -1527,15 +1527,16 @@ div.tocify {
 </div>
 <div id="motivating-case-study" class="section level1">
 <h1><span class="header-section-number">2</span> <strong>Motivating case study</strong></h1>
-<p><strong>A resource allocation problem</strong></p>
-<p>A company produces copper cable of 5 and 10 mm of diameter on a single production line with the following constraints:</p>
-<ol style="list-style-type: lower-alpha">
-<li><p>The available copper allows to produces 21000 meters of cable of 5 mm diameter per week.</p></li>
-<li><p>A meter of 10 mm diameter copper consumes 4 times more copper than a meter of 5 mm diameter copper.</p></li>
-</ol>
-<p>Due to demand, the weekly production of 5 mm cable is limited to <span class="math inline">\(15,000\)</span> meters and the production of 10 mm cable should not exceed 40 percent of the total production. Cable are respectively sold 50 and 200 EUR the meter.</p>
 <blockquote>
-<p>Question: <strong>What should the company produce in order to maximize its weekly revenue?</strong></p>
+<p><strong>A resource allocation problem</strong></p>
+</blockquote>
+<p>A company produces copper cable of 5 and 10 mm of diameter on <em>a single production line</em> with the following constraints:</p>
+<p>The production capacity of the company allows to produce up to 104.4 meters –under the assumtion of having a linear production line of both cables produced–. The company must produce 10mm diameter cable in a 60 percent proportion, with respect to the producion ot 5mm diameter cable.</p>
+<p>Product distribution consideration allow the company to produce at most 200 meters of both types of cable combined, since it is now allowed to store the excedent of cable not distributed within the week.</p>
+<p>Due to demand, the market can take up to 102.8571 meters of both types of cables, among which 42.85714 percent must be of 10 mm diameter cable, and 57.14286 percent of 5mm diameter cable.</p>
+<p>Both cables are respectively sold at 350 and 200 EUR the meter.</p>
+<blockquote>
+<p>Question: <strong>What amount of meters must the company produce of both types of cables in order to maximize its weekly revenue?</strong></p>
 </blockquote>
 <div id="some-other-examples" class="section level2">
 <h2><span class="header-section-number">2.1</span> Some other examples</h2>
@@ -1608,16 +1609,32 @@ div.tocify {
 </div>
 <div id="example-motivating-case-study" class="section level1">
 <h1><span class="header-section-number">5</span> Example: <strong>Motivating case study</strong></h1>
-<p>Lets consider <strong>two decision variables</strong>, <span class="math inline">\(x_1\)</span> and <span class="math inline">\(x_2\)</span>, and an <strong>objetvice function</strong> given by <span class="math display">\[
+<p>Lets consider <strong>two decision variables</strong>, * <span class="math inline">\(x_1\)</span> - meters of 10mm cable, and * <span class="math inline">\(x_2\)</span> - meters of 5mm cable,</p>
+<p>and an <strong>objetvice function</strong> given by <span class="math display">\[
 f(x_1,x_2)=350 x_1 + 300 x_2.
-\]</span> The <strong>optimization rule</strong> consists in <em>maximizing</em> <span class="math inline">\(f(x_1,x_2)\)</span> subjet to the following constraints:</p>
-<p><span class="math display">\[\begin{eqnarray}
+\]</span></p>
+<blockquote>
+<p>The <strong>optimization rule</strong> consists in <em>maximizing</em> <span class="math inline">\(f(x_1,x_2)\)</span>, i.e. finding such that <span class="math display">\[
+(x_1^*, x_2^*)
+= 
+\arg\max_{(x_1,x_2)\in \mathbb{R}^{2}} f(x_1,x_2),
+\]</span> subjet to the follow collection of <strong>constraints</strong>: <span class="math display">\[\begin{eqnarray}
+x_1 + x_2 &amp; \leq &amp; 200 \nonumber \\
+0.6 x_1 + 0.4 x_2 &amp; \leq &amp; 104.4 \nonumber \\
+0.4285714 x_1 + 0.5714286 x_2 &amp; \leq &amp; 102.8571 \nonumber \\
+x_1 &amp; \geq &amp; 0 \nonumber \\
+x_2 &amp; \geq &amp; 0. \nonumber
+\end{eqnarray}\]</span></p>
+</blockquote>
+<blockquote>
+<p>Alternatively, the constrainst cabe expressed as follows: <span class="math display">\[\begin{eqnarray}
 x_1 + x_2 &amp; \leq &amp; 200 \nonumber \\
 9 x_1 + 6 x_2 &amp; \leq &amp; 1566 \nonumber \\
 12 x_1 + 16 x_2 &amp; \leq &amp; 2880 \nonumber \\
 x_1 &amp; \geq &amp; 0 \nonumber \\
 x_2 &amp; \geq &amp; 0. \nonumber
 \end{eqnarray}\]</span></p>
+</blockquote>
 <div id="graphical-soluction" class="section level2">
 <h2><span class="header-section-number">5.1</span> Graphical soluction</h2>
 <ul>
