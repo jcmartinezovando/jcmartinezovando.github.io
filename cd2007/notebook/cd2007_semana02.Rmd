@@ -1,5 +1,5 @@
 ---
-title: "Semana 02 - Programación lineal – Parte 2/4"
+title: "Semana 02 - Linear programming – Part 2/4"
 author:
 -  Juan Carlos Martínez-Ovando
 -  jc-mo@tec.mx
@@ -17,20 +17,156 @@ fig_align: "center"
 fig_width: 18
 ---
 
-# Objetivos  {.tabset .tabset-fade .tabset-pills}
+# Objetives  {.tabset .tabset-fade .tabset-pills}
 
-* Describir conceptualmente el uso y elementos del método simplex.
+* Conceptually describe the structure, use and elements of the simplex method.
 
-* Explicar los elementos de la tabla simplex.
+* Explain the elements of the simplex table.
 
-* Reconocer y explicar las soluciones especiales obtenidas por el método simplex.
-
+* Recognize and explain the special solutions obtained by the simplex method.
 
 ---
 
-# Caso motivacion 
+# Linear programming formulation 
 
-## Objetivo de la seccion tematica
+## The structure of a linear program model
 
-* Estudiar los fundamentos matematicos, implementacion e intrepretacion del problema de seleccion de variables en el contexto de regresion.
+As mentioned in the previous week, a `linear programming` problem consists in:
 
+a. The `optimization` of an **linear objetive function** of `decision variables`
+
+b. The `optimization` shall consider admissible values defined by a set of **linear constraints**.
+
+Thus, in general, we need to `structure` (a.k.a. translate, if possible) the **problem** into the form
+\begin{eqnarray}
+\max (or \min) f(x_1,\ldots,x_n) & = & a_1 x_1 + \cdots + a_n x_n \nonumber \\
+\text{such that} & & c_{11} x_1 + \cdot + c_{1n} x_n  \leq l_1 \nonumber \\   
+ & & c_{21} x_1 + \cdots + c_{2n} x_n  \leq l_2 \nonumber \\   
+ & & \vdots \nonumber \\
+ & & c_{m1} x_1 + \cdots + c_{mn} x_n  \leq l_m \nonumber \\   
+ & & x_n \geq 0, \ \text{ for all } \ n.
+\end{eqnarray}
+
+> Thus, in order to **solve** a **real life problem** using `linear programming`, we need to be able to **translate** the `problem` into general structure of LP.
+
+> **Recall:** Not all decision problems can be structured as a `LP` model. And not all `LP` model can have a unique solution --nor a solution, at all--.
+
+## A Simple Example
+
+A small business sells two products, named `Product 1` and `Product 2`.
+
+Each tonne of `Product 1` consumes 30 working hours, and each tonne of `Product 2` consumes 20 working hours. 
+
+The business has a maximum of `2,700 working hours` for the period considered. As for machine hours, each tonne of `Products 1` and `2` consumes `5` and `10` machine hours, respectively. There are 850 machine hours available.
+
+Each tonne of `Product 1` yields `20 Me` of profit, while `Product 2` yields `60 Me` for each tonne sold. For technical reasons, the firm must produce a minimum of 95 tonnes in total between both products. 
+
+> **Problem:** We need to know how many tonnes of `Product 1` and `Product 2` must be produced to *maximize total profit*.
+
+> This situation is apt to be modeled as a `PL` model.
+
+### Formulation
+
+a. Defining the **decision variables**:
+
+$x_1$ - number of tonnes produced and sold of `Product 1`
+
+$x_2$ -  number of tonnes produced and sold of `Product 2`
+
+**Note: ** The cost coefficients of these variables are $20$ and $60$, respectively. Therefore, the **objective function** is defined multiplying each variable by itscorresponding cost coefficient.
+
+b. The **constraints** of this `LP` model are:
+ 
+   - A constraint WH making that the total amount of working hours used in Product 1 and Product 2, which equals 
+ $$30 x_1 + 20 x_2 \leq 2700,$$ hours.
+
+   - A similar constraint MH making that the total machine hours
+$$5 x_1 + 10 x_2 \leq 850.$$
+
+   - A `PM` constraint making that the total units produced and sold
+$$x_1 + x_2 \geq 95.$$
+
+c. Putting all this considerations together, the `LP` that maximizes profit is:
+
+\begin{eqnarray}
+\max f(x_1,x_2) & = & 20x_1 + 60x_2 \nonumber \\
+s.t. & &  \text{(a)} \ \ 30x_1 + 20x_2 \leq 2700 \nonumber \\
+     & &  \text{(b)} \ \  5x_1 + 10x_2 \leq 850 \nonumber \\
+     & &  \text{(c)} \ \  x_1 + x_2 \geq 95 \nonumber \\
+     & &  \text{(d)} \ \  x_1 \geq 0; x_2 \geq 0. \nonumber
+\end{eqnarray}
+
+### Solution using `lpSolve`
+
+The package `lpSolve` is one among several packages developed in `R` to solve `LP` models in medium to large scale.
+
+The follow instructions are used in `R` to check if `lpSolve` is installed already in the OS. If it is not previously installed, then it the script calls for its installation.
+
+
+```{r}
+if(!require("lpSolve")){install.packages("lpSolve")}
+library("lpSolve")
+```
+
+The instruction
+```
+library("lpSolve")
+```
+is intended to call and load the package `lpSolve` for use.
+
+### Defining parameters
+
+Once `lpSolve` is being installed and loaded, we shall proceed with the definition of the `domain variables`:
+
+```{r}
+obj.fun <- c(20 , 60)
+```
+
+The values `20` and `60` are the coefficients associated with the **objetive function**:
+$$
+f(x_1,x_2) = 20x_1 + 60x_2
+$$
+
+> Be ware that the order in which these parameters are stated is important. for instance, defining `obj.fun2 <- c(60 , 20)` would rise to a whole different objective function 
+$$
+f_2(x_1,x_2) = 60x_1 + 20x_2.
+$$
+
+The  we proceed with the definition of the **constraints**. 
+
+* In this particular case, the coefficients `30`, `20` are associated with the **constraint (a)** given by
+$$
+30x_1 + 20x_2.
+$$
+
+* Likewise, the coefficients (`5`,`10`) and (`1`,`1`) are devoted to define **constraints (b) and (c)**, respectively.
+
+$$
+5x_1 + 10x_2,\\
+x_1 + x_2.
+$$
+
+
+```{r}
+constr <- matrix (c(30 , 20, 
+                    5, 10, 
+                    1, 1), 
+                  ncol = 2, byrow = TRUE )
+constr.dir <- c(" <=", " <=", " >=")
+```
+
+**Constraints** are completeley specified by the definition of the **limits* or**/**bounds**, as follows:
+
+```{r}
+rhs <- c(2700, 
+         850, 
+         95)
+```
+
+> This figures correspon to $l_1$, $l_2$ and $l_3$ in the general specification, associated with **constraints (a), (b) and (c)**, respectively,
+
+---
+
+> **NOTE** that in `R`/`RStudio` the **objetive function** and **constraints** must be defined in a **refined grid** instead of being defined as a **continuous function**.
+
+---

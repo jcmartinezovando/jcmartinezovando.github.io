@@ -1,5 +1,5 @@
 ---
-title: "Week 01 - Linear programme – Part 1/4 "
+title: "Week 01 - Linear programming – Part 1/4 "
 author:
 -  Juan Carlos Martínez-Ovando
 -  jc-mo@tec.mx
