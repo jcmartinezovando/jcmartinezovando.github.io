@@ -148,7 +148,7 @@ $$
 
 
 ```{r}
-constr <- matrix(c(30 , 20, 
+constr <- matrix (c(30 , 20, 
                     5, 10, 
                     1, 1), 
                   ncol = 2, byrow = TRUE )
