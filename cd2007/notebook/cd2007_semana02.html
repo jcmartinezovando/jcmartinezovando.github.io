@@ -1549,8 +1549,9 @@ div.tocify {
 <p><strong>Recall:</strong> Not all decision problems can be structured as a <code>LP</code> model. And not all <code>LP</code> model can have a unique solution –nor a solution, at all–.</p>
 </blockquote>
 </div>
-<div id="a-simple-example" class="section level2">
-<h2><span class="header-section-number">2.2</span> A Simple Example</h2>
+</div>
+<div id="a-simple-example" class="section level1">
+<h1><span class="header-section-number">3</span> A Simple Example</h1>
 <p>A small business sells two products, named <code>Product 1</code> and <code>Product 2</code>.</p>
 <p>Each tonne of <code>Product 1</code> consumes 30 working hours, and each tonne of <code>Product 2</code> consumes 20 working hours.</p>
 <p>The business has a maximum of <code>2,700 working hours</code> for the period considered. As for machine hours, each tonne of <code>Products 1</code> and <code>2</code> consumes <code>5</code> and <code>10</code> machine hours, respectively. There are 850 machine hours available.</p>
@@ -1561,8 +1562,8 @@ div.tocify {
 <blockquote>
 <p>This situation is apt to be modeled as a <code>PL</code> model.</p>
 </blockquote>
-<div id="formulation" class="section level3">
-<h3><span class="header-section-number">2.2.1</span> Formulation</h3>
+<div id="formulation" class="section level2">
+<h2><span class="header-section-number">3.1</span> Formulation</h2>
 <ol style="list-style-type: lower-alpha">
 <li>Defining the <strong>decision variables</strong>:</li>
 </ol>
@@ -1586,8 +1587,8 @@ s.t. &amp; &amp;  \text{(a)} \ \ 30x_1 + 20x_2 \leq 2700 \nonumber \\
      &amp; &amp;  \text{(d)} \ \  x_1 \geq 0; x_2 \geq 0. \nonumber
 \end{eqnarray}\]</span></p>
 </div>
-<div id="solution-using-lpsolve" class="section level3">
-<h3><span class="header-section-number">2.2.2</span> Solution using <code>lpSolve</code></h3>
+<div id="solution-using-lpsolve" class="section level2">
+<h2><span class="header-section-number">3.2</span> Solution using <code>lpSolve</code></h2>
 <p>The package <code>lpSolve</code> is one among several packages developed in <code>R</code> to solve <code>LP</code> models in medium to large scale.</p>
 <p>The follow instructions are used in <code>R</code> to check if <code>lpSolve</code> is installed already in the OS. If it is not previously installed, then it the script calls for its installation.</p>
 <pre class="r"><code>if(!require(&quot;lpSolve&quot;)){install.packages(&quot;lpSolve&quot;)}</code></pre>
@@ -1597,8 +1598,8 @@ s.t. &amp; &amp;  \text{(a)} \ \ 30x_1 + 20x_2 \leq 2700 \nonumber \\
 <pre><code>library(&quot;lpSolve&quot;)</code></pre>
 <p>is intended to call and load the package <code>lpSolve</code> for use.</p>
 </div>
-<div id="defining-parameters" class="section level3">
-<h3><span class="header-section-number">2.2.3</span> Defining parameters</h3>
+<div id="defining-parameters" class="section level2">
+<h2><span class="header-section-number">3.3</span> Defining parameters</h2>
 <p>Once <code>lpSolve</code> is being installed and loaded, we shall proceed with the definition of the <code>domain variables</code>:</p>
 <pre class="r"><code>obj.fun &lt;- c(20 , 60)</code></pre>
 <p>The values <code>20</code> and <code>60</code> are the coefficients associated with the <strong>objetive function</strong>: <span class="math display">\[
@@ -1623,14 +1624,21 @@ x_1 + x_2.
 <pre class="r"><code>constr &lt;- matrix (c(30 , 20, 
                     5, 10, 
                     1, 1), 
-                  ncol = 2, byrow = TRUE )
-constr.dir &lt;- c(&quot; &lt;=&quot;, &quot; &lt;=&quot;, &quot; &gt;=&quot;)</code></pre>
-<p><strong>Constraints</strong> are completeley specified by the definition of the <strong>limits* or</strong>/<strong>bounds</strong>, as follows:</p>
+                  ncol = 2, byrow = TRUE )</code></pre>
+<p>Directions of each <em>constraint</em> must be set in a list, as follows:</p>
+<pre class="r"><code>constr.dir &lt;- c(&quot;&lt;=&quot;, 
+                &quot;&lt;=&quot;, 
+                &quot;&gt;=&quot;)</code></pre>
+<p><strong>Constraints</strong> are completeley specified by the definition of the <strong>limits</strong> or <strong>bounds</strong>, as follows:</p>
 <pre class="r"><code>rhs &lt;- c(2700, 
          850, 
          95)</code></pre>
 <blockquote>
-<p>This figures correspon to <span class="math inline">\(l_1\)</span>, <span class="math inline">\(l_2\)</span> and <span class="math inline">\(l_3\)</span> in the general specification, associated with <strong>constraints (a), (b) and (c)</strong>, respectively,</p>
+<p>This figures correspon to <span class="math display">\[
+l_1 = 2700 \\
+l_2 = 850 \\
+l_3 = 95,
+\]</span> in the general specification, associated with <strong>constraints (a), (b) and (c)</strong>, respectively,</p>
 </blockquote>
 <hr />
 <blockquote>
@@ -1638,7 +1646,79 @@ constr.dir &lt;- c(&quot; &lt;=&quot;, &quot; &lt;=&quot;, &quot; &gt;=&quot;)</
 </blockquote>
 <hr />
 </div>
+<div id="solving-the-lp-model" class="section level2">
+<h2><span class="header-section-number">3.4</span> Solving the <code>LP</code> model</h2>
+<p>The solution of the <code>LP</code> model in <code>R</code> using the package <code>lpSolve</code> is implemented trough the function <code>lp()</code>, whose arguments/inputs are:</p>
+<ul>
+<li><p>Optimization rule (either <code>max</code> or <code>min</code>). In our case, it is <code>&quot;max&quot;</code>.</p></li>
+<li><p>Objective function, defined in a grid. In this case, it is the object <code>obj.func</code></p></li>
+<li><p>Set of constraint coefficients. In this case, those correspond to the object <code>constr.dir</code></p></li>
+<li><p>Set of <em>bounds7constraint limits</em>, which correspond to <code>rhs</code> in this case.</p></li>
+</ul>
+<pre class="r"><code>prod.sol &lt;- lp(&quot;max&quot;, 
+                obj.fun, 
+                constr,
+                constr.dir, 
+                rhs,
+                compute.sens = TRUE )</code></pre>
+<p>The solution produces the object <code>prod.sol</code> with the follow attributes:</p>
+<pre class="r"><code>ls(prod.sol)</code></pre>
+<pre><code>##  [1] &quot;bin.count&quot;        &quot;binary.vec&quot;       &quot;compute.sens&quot;     &quot;const.count&quot;     
+##  [5] &quot;constraints&quot;      &quot;dense.col&quot;        &quot;dense.const.nrow&quot; &quot;dense.ctr&quot;       
+##  [9] &quot;dense.val&quot;        &quot;direction&quot;        &quot;duals&quot;            &quot;duals.from&quot;      
+## [13] &quot;duals.to&quot;         &quot;int.count&quot;        &quot;int.vec&quot;          &quot;num.bin.solns&quot;   
+## [17] &quot;objective&quot;        &quot;objval&quot;           &quot;presolve&quot;         &quot;scale&quot;           
+## [21] &quot;sens.coef.from&quot;   &quot;sens.coef.to&quot;     &quot;solution&quot;         &quot;status&quot;          
+## [25] &quot;tmp&quot;              &quot;use.dense&quot;        &quot;use.rw&quot;           &quot;x.count&quot;</code></pre>
+<blockquote>
+<p>The <strong>maximum total profit</strong> is reached at <strong>4,900</strong>, which can be accessed by symply typing <code>prod.sol</code>.</p>
+</blockquote>
+<pre class="r"><code>prod.sol</code></pre>
+<pre><code>## Success: the objective function is 4900</code></pre>
+<blockquote>
+<p>To know the <strong>maximum value of the objective function</strong>:</p>
+</blockquote>
+<pre class="r"><code>prod.sol$objval</code></pre>
+<pre><code>## [1] 4900</code></pre>
+<blockquote>
+<p>The values of the <strong>decision variables</strong> that <strong>mazimizes profit</strong> are:</p>
+</blockquote>
+<pre class="r"><code>prod.sol$solution</code></pre>
+<pre><code>## [1] 20 75</code></pre>
 </div>
+<div id="main-result" class="section level2">
+<h2><span class="header-section-number">3.5</span> Main result</h2>
+<blockquote>
+<p>That is to say, the <strong>company</strong> must produce and sold</p>
+</blockquote>
+<ul>
+<li><p><code>20</code> tonnes of <code>Product 1</code></p></li>
+<li><p><code>75</code> tonnes of <code>Prodcut 2</code></p></li>
+</ul>
+<blockquote>
+<p>in order to achieve <strong>maximum profit at</strong> <code>4,900</code>.</p>
+</blockquote>
+<hr />
+</div>
+</div>
+<div id="workshop" class="section level1">
+<h1><span class="header-section-number">4</span> Workshop</h1>
+<p>Check on the two projects described in the file <code>cd2007_semana02_cases.pdf</code> as a group activity:</p>
+<ul>
+<li><p>One case is <strong>procedural</strong>, to get familiar with <code>R</code> and <code>lpSolve</code></p></li>
+<li><p>Another is <strong>conceptual</strong>, to get familiar with the <strong>model specification of a problem</strong>.</p></li>
+</ul>
+</div>
+<div id="next-week" class="section level1">
+<h1><span class="header-section-number">5</span> Next week</h1>
+<p>A very <strong>important question emerges</strong> now:</p>
+<blockquote>
+<p>What if I/we cannot achieve the <code>coordinates that maximize</code> the <code>objective function</code>?</p>
+</blockquote>
+<blockquote>
+<p>How can I maesure the impact induced by those <code>deviations</code>?</p>
+</blockquote>
+<p>The answer to those questions will be addressed though the so called <strong>sensitivity analysis</strong>.</p>
 </div>
 
 
