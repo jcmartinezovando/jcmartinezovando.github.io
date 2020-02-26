@@ -1,0 +1,75 @@
+---
+title: "CD2007 Semana 03 Case1Sol"
+author: "Juan Carlos Martinez Ovando"
+date: "26/2/2020"
+output: pdf_document
+#output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+# Case 1: A purchase plan with decreasing unit costs  {.tabset .tabset-fade .tabset-pills}
+
+A manufacturing manager is in charge of minimizing the purchasing costs (raw materials plus storage costs) of the following four months.
+
+In `Table 1` can be found the cost of one unit of raw material and the demand of raw material for each month. Storage costs are equal to 2 EUR for each unit stored at the end of the month. Any unit of raw material purchased at given month can be used to cover the demand of the same month, or be stored to cover the demand of months to come. At the beginning of month 1 there is no stock, and there are no minimum stock requirements for any month.
+
+![**Table 1**](./figures/cd2007_semana03_case1.PNG)
+
+For the next four months, the supplier of raw materials has made an
+special offer: 
+
+> All units purchased above 200 in any given month will have a discounts of 2 EUR. For instance, if a purchase of 350 units is ordered in month 1, the first 200 units will be sold for 12 EUR each, and the following 150 will be sold for 10 EUR each.
+
+## Case objective
+
+> Define the decision variables (provide a brief definition of each set of defined variables), objective function and constraints of a linear programming model that minimizes total purchasing costs.
+
+# Solution
+
+
+A solution to this problem may be stated as follows:
+
+a. Define the `domain variables` as:
+
+ - $q_i$ - representing the quantity purchased in month $i$ equal or below 200
+
+ - $r_i$ - representing the quantity purchased in month $i$ above 200
+ 
+ - $s_i$ - representing the stock at the end of month $i$
+ 
+ - $b_i$ - binary variable, which are equal to 1 if more than 200 units are purchased on month $i$ and equal to 0 in other case
+ 
+ - for $1=1,\ldots,4$
+ 
+b. Total purchase at a given month $i$ is equal to $q_i+r_1$.
+ 
+c. Monthly demand at $i$ is given by
+$$
+s_{i-1} + q_i + r_i - s_i = d_i,
+$$
+for $i=1,\ldots,4$ with $s_0$ being $0$.
+
+d. Constraint components due to *expensiveness consideration*,
+$$
+q_i \leq 200 \\
+q_i \geq 200 b_i \\
+r_i \leq M b_i, \\
+$$
+for $i=1,\ldots,4$.
+
+> The **rationale** of the above specification is the following: If $b_i = 0$, we have that $q_i \leq 200$ and $r_i = 0$ --since the second constraint is inactive--, whereas when $b_i = 1$, we have that $q_i \leq 200$, and $q_i \geq 200$ at the same time, thus $q_i = 200$; while there is no upper bound
+for $r_i$, if $M$ is large enough. (*Students, explain why is that?*).
+
+e. Defining $c_i$ as the unit costs of purchasing on month $i$ the model turns into:
+```
+\begin{eqnarray}
+\min f() & = & \sum_{i=1}^4 \left(c_i q_i +(c_i - 2) r_i + 2 s_i\right)\nonumber \\
+\text{s.t.} & & s_{i-1} + q_i + r_i - s_i = d_i, \text{ for } i=1,\ldots 4 \nonumber \\
+&& q_i \leq 200
+&& q_i \geq 200b_i
+&& r_i \leq Mb_i
+&& q_i; r_i \geq 0; b_i.
+\end{eqnarray}
+```
