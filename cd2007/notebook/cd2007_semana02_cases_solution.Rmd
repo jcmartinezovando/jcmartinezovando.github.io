@@ -1,0 +1,122 @@
+---
+title: "CD2007 Semana 02 Soluciones de Casos"
+author: "Juan Carlos Martinez Ovando"
+date: "26/2/2020"
+output: pdf_document
+#output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Case 1
+
+Set up a problem in R to maximize
+$$
+x_1 + 9 x_2 + x_3 
+$$
+subject to
+\begin{eqnarray}
+x_1 + 2 x_2 + 3 x_3 & <= & 9 \\
+3 x_1 + 2 x_2 + 2 x_3 & <= & 15.
+\end{eqnarray}
+
+## Solution
+
+```{r}
+I.rule <- "max"
+II.fobj <- c(1,9,1)
+III.Acon <- matrix(c(1,2,3,3,2,2), nrow = 2, byrow = TRUE)
+IV.dir <- c("<=","<=")
+V.bound <- c(9,15)
+
+library("lpSolve")
+case1.sol <- lp(I.rule,
+                II.fobj,
+                III.Acon,
+                IV.dir,
+                V.bound)
+
+case1.sol$objval
+
+case1.sol$solution
+```
+
+\newpage
+
+# Case 2
+
+## Part 1: Solution
+
+We define the `decision variables` (label and order) as follows:
+$$
+(q_1,q_2,q_3,q_4,s_1,s_2,s_3,s_4).
+$$
+
+The matematical specification of this sitiation sondires:
+
+* **Optimization rule.-** Since we are dealing with costs, we define the target of minimizing the aggregated costs, i.e.
+$$
+\min
+$$
+
+* **Objective function.-** This is defined as the aggregated costs over the four months, considering the balance between `production` and `stock`, i.e.:
+$$
+\sum_{i=1}^{4} \left(12 q_i + 2 s_i\right).
+$$
+
+* **Constraint functions.-** This is defined in two blocks, one for the side of `demand` and another for `working hours` required.
+
+ - on the `demand` side
+ 
+\begin{eqnarray}
+       q_1 - s_1 & = & 100\\ 
+ s_1 + q_2 - s_2 & = & 200\\
+ s_2 + q_3 - s_3 & = & 150\\
+ s_3 + q_4 - s_4 & = & 400,
+\end{eqnarray}
+
+since stock at month $0$ is $s_0=0$; whereas
+
+ - on the `working hours` side
+ 
+\begin{eqnarray}
+  q_1 & <= & 400\\ 
+  q_2 & <= & 400\\ 
+  q_3 & <= & 300\\ 
+  q_4 & <= & 300.\\ 
+\end{eqnarray}
+
+
+
+Accordinly, the specification for the `lpSolve` inputs and solution of the `LP` problem are given by:
+
+```{r}
+I.rule <- "min"
+II.fobj <- c(12,12,12,12,2,2,2,2)
+III.Acon <- matrix(c(1,0,0,0,-1,0,0,0,
+                     0,1,0,0,1,-1,0,0,
+                     0,0,1,0,0,1,-1,0,
+                     0,0,0,1,0,0,1,-1,
+                     1,0,0,0,0,0,0,0,
+                     0,1,0,0,0,0,0,0,
+                     0,0,1,0,0,0,0,0,
+                     0,0,0,1,0,0,0,0), 
+                   nrow = 8, 
+                   byrow = TRUE)
+IV.dir <- c("=","=","=","=","<=","<=","<=","<=")
+V.bound <- c(100,200,150,400,400,400,300,300)
+
+library("lpSolve")
+case2.sol <- lp(I.rule,
+                II.fobj,
+                III.Acon,
+                IV.dir,
+                V.bound)
+
+case2.sol$objval
+
+case2.sol$solution
+```
+
