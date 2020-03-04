@@ -27,7 +27,7 @@ fig_width: 18
 
 ---
 
-# Understanding of the situation 
+# Understanding the situation 
 
 When working on the understanding of the problem(s) at hand, as one of Linear Programming, please, pay attention to **identify** in the context/description of the problem situation the following: 
 
