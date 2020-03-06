@@ -63,6 +63,8 @@ A manufacturing manager is in charge of minimizing the total costs (raw material
 
 Labor costs are of 12 e per hour, and only worked hours are payed. Each unit of final product needs 30 minutes of labor.
 
+![**Table 1**](./figures/cd2007_semana03_case0.PNG)
+
 Storage costs are equal to 2 e for each unit stored at the end of the month. Any unit produced at a given month can be used to cover the demand of the same month, or be stored to cover the demand of months to come. At the beginning of month 1 there is no stock, and there are no minimum stock requirements for any month.
 
 ## Objetives
@@ -78,9 +80,9 @@ Storage costs are equal to 2 e for each unit stored at the end of the month. Any
 
 A manufacturing manager is in charge of minimizing the purchasing costs (raw materials plus storage costs) of the following four months.
 
-In `Table 1` can be found the cost of one unit of raw material and the demand of raw material for each month. Storage costs are equal to 2 EUR for each unit stored at the end of the month. Any unit of raw material purchased at given month can be used to cover the demand of the same month, or be stored to cover the demand of months to come. At the beginning of month 1 there is no stock, and there are no minimum stock requirements for any month.
+In `Table 2` can be found the cost of one unit of raw material and the demand of raw material for each month. Storage costs are equal to 2 EUR for each unit stored at the end of the month. Any unit of raw material purchased at given month can be used to cover the demand of the same month, or be stored to cover the demand of months to come. At the beginning of month 1 there is no stock, and there are no minimum stock requirements for any month.
 
-![**Table 1**](./figures/cd2007_semana03_case1.PNG)
+![**Table 2**](./figures/cd2007_semana03_case1.PNG)
 
 For the next four months, the supplier of raw materials has made an
 special offer: 
@@ -95,13 +97,13 @@ special offer:
 
 # Case 3: A production plan with extra capacity  {.tabset .tabset-fade .tabset-pills}
 
-You are in charge of planning the production of a chemical product for the next four months. The monthly demand and the purchasing unit costs of raw material are listed in `Table 2`. The capacity of the plant is of 1,300 tonnes (t.) per month. 
+You are in charge of planning the production of a chemical product for the next four months. The monthly demand and the purchasing unit costs of raw material are listed in `Table 3`. The capacity of the plant is of 1,300 tonnes (t.) per month. 
 
 The demand of a month can be covered with the production of the same month, and also with production of past months. The storage costs are of 2K EUR per tonne stocked at the end of the month. 
 
 The stock of finished product at the beginning of the first month is of 200 T, and it is expected to hold the same quantity at the end of the fourth month. There are no stocks of raw material, so all stocks are of finished product.
 
-![**Table 2**](./figures/cd2007_semana03_case2.PNG)
+![**Table 3**](./figures/cd2007_semana03_case2.PNG)
 
 ## Objectives
 
