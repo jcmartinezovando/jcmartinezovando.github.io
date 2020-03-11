@@ -1,5 +1,3 @@
-I.rule <- "min"
-II.fobj <- c(12,12,12,12,2,2,2,2)
 III.Acon <- matrix(c(1,0,0,0,-1,0,0,0,
                      0,1,0,0,1,-1,0,0,
                      0,0,1,0,0,1,-1,0,
@@ -11,6 +9,8 @@ III.Acon <- matrix(c(1,0,0,0,-1,0,0,0,
                    nrow = 8, 
                    byrow = TRUE)
 
+rule <- "min"
+
 IV.dir <- c("=",
             "=",
             "=",
@@ -20,7 +20,7 @@ IV.dir <- c("=",
             "<=",
             "<=")
 
-V.bound <- c(100,
+V <- c(100,
              200,
              150,
              400,
@@ -29,9 +29,13 @@ V.bound <- c(100,
              300,
              300)
 
+fobj <- c(12,12,12,12,2,2,2,2)
+
+
+
 library("lpSolve")
-case2.sol <- lp(I.rule,
-                II.fobj,
+esta.es.mi.sol <- lp(rule,
+                fobj,
                 III.Acon,
                 IV.dir,
                 V.bound)
