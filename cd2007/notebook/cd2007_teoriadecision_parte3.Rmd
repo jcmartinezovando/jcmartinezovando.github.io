@@ -1,0 +1,262 @@
+---
+title: CD2007 Metodos Cuantitativos y de Optimizacion
+subtitle: Teoria de Decision - Parte 3
+author: Juan Carlos Martinez Ovando
+institute: Escuela de Negocios
+#titlegraphic: /Dropbox/teaching/clemson-academic.png
+fontsize: 10pt
+output:
+ ioslides_presentation:
+    smaller: true
+#    logo: ~/Dropbox/teaching/clemson-paw-transparent.png
+    css: ~/svm-r-sources/svm-ioslides-css.css    
+ beamer_presentation:
+    template: ~/svm-r-sources/svm-latex-beamer.tex
+    keep_tex: true
+# toc: true
+    slide_level: 2
+---
+
+
+---
+
+# 2. Elementos de la teoría de decisiones
+
+* Continuamos con la revision de la **teoria de decision bajo incertidumbre**.
+
+* Consideraremos ahora el elemento de **aprendizaje (estadistico)** que puede definirse en este marco.
+
+* Para esto, necesitamos entender:
+
+  1. Naturaleza de los **datos/informacion** disponible para realizar el procedimiento de aprendizaje
+  
+  2. Paradigma de aprendizaje por adoptarse
+  
+---
+
+**\textcolor{orange}{Datos}**
+
+Los datos que consideramos dentro del proceso de aprendizaje corresponden a realizaciones de los eventos inciertos:
+$$
+c_{1 j_1 i_1},\ldots,c_{l j_l i_l},\ldots,c_{n j_n i_n}
+$$
+En la medida de lo posible, debemos garantizar o considerar que las $c_{l j_l i_i}$s se obtienen de manera **homogenea**, ya sea como:
+
+* Realizaciones de eventos inciertos obtenidos en circumstancias variadas, o como,
+
+* Realizaciones de $n$ tomas de decisiones pasadas.
+
+Cualquiera de estos dos casos, consideraremos genericamente que los datos pueden reetiqutarse como
+$$
+\text{datos}=\{c_{1 },\ldots,c_{l },\ldots,c_{n }\},
+$$
+para no hacer distincion si provienen de tomas de decisiones pasadas o informacion onjetiva semejante.
+
+
+---
+
+**\textcolor{orange}{Modelo}**
+
+Recordemos que la cuantificacion de la incertidumbre sobre las consecuencias es un modelo de probabilidad $Q$ tal que para toda accion $a_j$ con $\mathcal{C}_j=\{c_{j1},\ldots,c_{jC_j}\}$ consecuencias posibles,
+
+* $Q(c_{ji})\geq 0$ para todo $i$
+
+* $\sum_{i=1}^{C_j}Q(c_{ji})=1$.
+
+Pero, las consecuencias en $\mathcal{C}_j$ son definidas de manera deterministica a partir de la accion $a_j$ y de la realizacion de un elemento de incertidumbre, $X_j$, i.e.
+$$
+c_{ji}=c(a_j,X_j),
+$$
+donde $c(\cdot,\cdot)$ es una funcion deterministica y $X_j$ es una variable aleatoria.
+
+---
+
+**\textcolor{orange}{Caso finito}**
+
+Por ejemplo, consideremos que $\mathcal{C}_j$ es finito en un conjunto de $C_j$ posibles consecuencias. En este caso, sin perdida de generalidad, la variable aleatoria $X_j$ tendra soporte
+$$
+\mathcal{X}_j=\{1,2,\ldots,C_j\},
+$$
+y el modelo de probabilidad $Q(\cdot)$ seria definido en terminos del modelo multinomial, i.e.
+$$
+X_j \sim \text{Mult}(x|1,\theta_1,\ldots,\theta_{C_j}),
+$$
+donde $\theta=(\theta_1,\ldots,\theta_{C_j})$ representa el vector de probabilidades de la ocurrencia para las alternativas para $X_j$, i.e. 
+$$
+\theta_{i}=\mathbb{P}(X_j=i)=Q\left(c(a_j,i)\right).
+$$
+
+---
+
+**\textcolor{orange}{Diagrama}**
+
+---
+
+## 2.9. Actualización/aprendizaje
+
+*\textcolor{orange}{Continuaremos con la explicacion del proceso de aprendizaje en el caso finito y, posteriormente, veremos la extension al caso infinito}*
+
+- ---------------------------------------------- -
+  El proceso de  **aprendizaje** en el marco de 
+  toma de decisiones se refiere solamente a la
+  actualizacion de $Q$ con base en *datos*
+- ---------------------------------------------- -
+
+*Aun no existe un marco teorico de referencia para actualizar $U$ con base en acciones pasadas.*
+
+---
+
+Asi, considerando un conjunto de informacion en la forma de **datos**,
+$$
+\{c_1,\ldots,c_n\},
+$$
+referidos a $n$ datos asociados con $X_j$, i.e.
+$$
+\{x_1,\dots,x_n\},
+$$
+donde cada $x_i$ es de un valor en $\mathcal{X}_j$, el **proceso de aprendizaje** consiste en actualizar 
+$$
+\text{Mult}(x|1,\theta)=\text{Mult}(x|1,\theta_1,\ldots,\theta_{C_j})
+$$
+a la luz de los **datos**, con $\theta$ referido como antes al vector de probabilidades asociado.
+
+---
+
+### 2.9.1. Enfoque frecuentista
+
+El **paradigma frecuentista** para el aprendizaje estadistico busca la configuracion de $\text{Mult}(x|1,\theta_1,\ldots,\theta_{C_j})$ mas compatible con los **datos**. 
+
+* Recordemos que el modelo $\text{Mult}(x|1,\theta)$ es definido dentro de la clase de modelos indizado por $\Theta$, espacio parametral, que en este caso corresponde al *simplejo* de dimension $(C_j-1)$.
+
+Asi, bajo este paradigma, el modelo particular mas compatible con los datos es
+$$
+\hat{\theta}=\arg\max_{\theta \in \Theta} \prod_{i=1}^{n} \text{Mult}(x_i|1,\theta_1,\ldots,\theta_{C_j}),
+$$
+que en este caso corresponde a definir $\hat{\theta}=(\hat{\theta}_1,\ldots,\hat{\theta}_{C_j})$ como,
+$$
+\hat{\theta}_l=\frac{\#\{x_i:x_i=l\}}{n},
+$$
+para $l=1,\ldots,C_j$.
+
+---
+
+**\textcolor{orange}{Toma de decisiones actualizada }**
+
+La toma de decisiones actualizada en el marco $(\mathcal{A},\mathcal{C},U,Q)$ --o equivalentemente, $(\mathcal{A},\mathcal{X},c,U,\text{Mult})$, en este caso-- no se realiza con base en el modelo mas compatible para $X_j$ con base en los datos, sino con el **\textcolor{orange}{modelo predictivo mas compatible}**, i.e.
+$$
+\mathbb{P}\left(X_j=l|\text{datos}\right) 
+\cong
+\text{Mult}(l|1,\hat{\theta}_1,\ldots,\hat{\theta}_{C_j})
+$$
+para todo $l=1,\ldots,C_j$ y todo $j=1,\ldots,A$.
+
+---
+
+**\textcolor{orange}{Toma de decisiones actualizada}**
+
+Las **tres reglas de decisiones** que hemos revisado anteriormente pueden definirse con base en el marco de decisiones actualizado con datos. Por ejemplo, la regla basada en la **utilidad esperada maxima** dicta
+
+**\textcolor{orange}{P.1.}** Calcula la utilidad esperada para la accion $a_j$ como 
+$$
+\mathbb{E}_{X_j|x_1,\ldots,x_n}(a_j)=\sum_{i=1}^{C_j}U(a_j,i)\text{Mult}(i|1,\hat{\theta}_1,\ldots,\hat{\theta}_{C_j})
+$$
+para $j=1,\ldots,A$, recordando que $\hat{\theta}=\hat{\theta}(\text{datos})$.
+
+**\textcolor{orange}{P.2.}** La accion optima a seguir, $\bar{a}$, es tal que
+$$
+\bar{a}=\arg\max_{a_j\in\mathcal{A}} \mathbb{E}_{X_j|x_1,\ldots,x_n}(a_j).
+$$
+
+---
+
+### 2.9.2. Enfoque bayesiano
+
+El **paradigma bayesiano** para el aprendizaje estadistico busca medir diferenciadamente el grado de compatibilidad de las diferentes configuraciones de $\text{Mult}(x|1,\theta_1,\ldots,\theta_{C_j})$ respeco a **datos** e **informacion suplementaria**.
+
+* Recordemos que la *informacion suplementaria* esta expresada en la forma de probabilidad sobre el modelo, en este caso sobre $\theta$, definida como $\pi(\theta|\text{suplemento})$.
+
+En este caso, la forma estructural de $\pi(\theta|\text{suplemento})$ que resulta conveniente trabajar es la distriucion Dirichlet, dada por
+\begin{eqnarray}
+\pi(\theta|\text{suplemento})
+& = & \text{Dir}(\theta_1,\ldots,\theta_{C_j}|\alpha_1,\ldots,\alpha_{C_j}) \nonumber \\
+& \propto & \prod_{i=1}^{C_j}\theta_i^{\alpha_i-1}, \nonumber
+\end{eqnarray}
+donde la constante de normalizacion es $\frac{\prod_{i=1}^{C_j}\Gamma(\alpha_i)}{\Gamma\left(\sum_{i=1}^{c_j}\alpha_i\right)}$.
+
+---
+
+En la especificacion anterior presumiblemente los valores de $\alpha_i$s (hiperparametros) estan definidos en terminos de la *informacion suplementaria*, i.e. 
+$$
+\alpha_i=\alpha_i(\text{suplemento})
+$$
+para $i=1,\ldots,C_j$.
+
+---
+
+**\textcolor{orange}{Actualizacion/prediccion bayesiana}**
+
+La actualizacion bayesiana, en el marco de toma de decisiones, consiste en dar una cuantificacion de la plausibilidad de $X_j$ con base en el **modelo**, los **datos** y el **suplemento**.
+
+Tal cuantificacion puede, a diferencia del frecuentista, calcularse probabilisticamente como,
+\begin{eqnarray}
+\mathbb{P}(X_j|\text{datos},\text{suplemento})
+& = &
+\frac{\int_{\theta}\text{Mult}(X_j|\theta)\prod_{i=1}^{n}\text{Mult}(x_i|\theta)\text{Dir}(\theta|\alpha)d\theta}{p(x_1,\ldots,x_n)}
+\nonumber \\
+&=&
+\int_{\theta}\text{Mult}(X_j|\theta)\frac{\prod_{i=1}^{n}\text{Mult}(x_i|\theta)\text{Dir}(\theta|\alpha)}{p(x_1,\ldots,x_n)}d\theta
+\nonumber \\
+&=&
+\int_{\theta}\text{Mult}(X_j|\theta)\text{Dir}(\theta|\tilde{\alpha})d\theta,
+\end{eqnarray}
+donde $\tilde{\alpha}=(\tilde{\alpha}_1,\ldots,\tilde{\alpha}_{C_j})$ es tal que 
+$$
+\tilde{\alpha}_l=\alpha_l+\#\{x_i:x_i=l\},
+$$
+para $l=1,\ldots,C_j$.
+
+---
+
+**\textcolor{orange}{Comentarios}**
+
+* Recordemos que las $a_i$s estan en funcion del **suplemento de informacion**.
+
+* $\mathbb{P}(X_j|\text{datos},\text{suplemento})$ corresponde a la distribucion predictiva, la cual puede interpretarse como el promedio de los modelos dentro de la **clase multinomial** ponderados/diferenciados con base en 
+$$
+\pi(\theta|\text{datos},\text{suplemento}).
+$$
+
+* La distribucion Dirichlet, en este caso, se elije estructuralmente por ser *conjugada* con el modelo multinomial. No es la unica forma de especificar $\pi(\theta)$, aunque si es la mas conveniente para manipulacion analitica.
+
+---
+
+**\textcolor{orange}{Toma de decisiones}**
+
+La toma de decisiones actualizada, bajo el enfoque bayesiano, se realiza con base en $\pi(\theta|\text{datos},\text{suplemento})$. Por ejemplo, para la **\textcolor{orange}{regla basada en utilida esperada maxima}**,
+
+**\textcolor{orange}{P.1.}** Calcula la utilidad esperada para la accion $a_j$ como 
+$$
+\mathbb{E}_{X_j|x_1,\ldots,x_n}(a_j)=\sum_{i=1}^{C_j}U(a_j,i)\mathbb{P}(X_j=i|\text{datos},\text{suplemento}),
+$$
+para $j=1,\ldots,A$, recordando que $\hat{\theta}=\hat{\theta}(\text{datos})$.
+
+**\textcolor{orange}{P.2.}** La accion optima a seguir, $\bar{a}$, es tal que
+$$
+\bar{a}=\arg\max_{a_j\in\mathcal{A}} \mathbb{E}_{X_j|x_1,\ldots,x_n}(a_j).
+$$
+
+---
+
+## 2.10. Comentarios
+
+* Los dos procedimientos que hemos revisado permiten tomar decisiones actualizadas con dos fuentes de informacion
+
+-------------- - ----------------------------------
+**Paradigma**        **Informacion**
+Frecuentista     Datos
+Bayesiano        Datos + Informacion suplementaria
+-------------- - ----------------------------------
+
+*Siendo ambos ligados al principio de verosimilitud.*
+
+* Aunque la *toma de decisiones actualizada* esta definida dentro de un paradigma inferencial, el paradigma inferencia mismo puede definirse en un contexto de **toma de decisiones**, como veremos en las siguientes sesiones.

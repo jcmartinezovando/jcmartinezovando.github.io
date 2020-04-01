@@ -1,55 +1,49 @@
-I.rule <- "min"
-II.fobj <- c(6,8,10,12,2,2,2,1000,1000,1000)
-II.fobj
+f.obj <- c(1, 9, 1)
+f.con <- matrix (c(1, 2, 3, 3, 2, 2), nrow=2, byrow=TRUE)
+f.dir <- c("<=", "<=")
+f.rhs <- c(9, 15)
 
-VI.int <- 8:10
-VI.int
-
-III.Acon <- matrix(c(1,0,0,0,-1,0,0,0,0,0,
-                     0,1,0,0,1,-1,0,0,0,0,
-                     0,0,1,0,0,1,-1,0,0,0,
-                     0,0,0,1,0,0,1,0,0,0,
-                     1,0,0,0,0,0,0,0,0,0,
-                     0,1,0,0,0,0,0,0,0,0,
-                     0,0,1,0,0,0,0,0,0,0,
-                     0,0,0,1,0,0,0,0,0,0), 
-                   nrow = 8, 
-                   byrow = TRUE)
-
-III.Acon
-dim(III.Acon)
-
-IV.dir <- c("=",
-            "=",
-            "=",
-            "=",
-            "<=",
-            "<=",
-            "<=",
-            "<=")
-IV.dir
-length(IV.dir)
-
-V.bound <- c(100,
-             200,
-             150,
-             400,
-             400,
-             400,
-             300,
-             300)
-V.bound
-length(V.bound)
 
 library("lpSolve")
-case2p2.solmixtype <- lp(I.rule,
-                          II.fobj,
-                          III.Acon,
-                          IV.dir,
-                          V.bound,
-                          VI.int)
+example.sol <- lp ("max", f.obj, f.con, f.dir, f.rhs)
 
-case2p2.solmixtype$solution
+example.sol$solution
 
-case2p2.solmixtype$objval
+# Sensitiveness
 
+lp ("max", f.obj, f.con, f.dir, f.rhs, compute.sens=TRUE)$sens.coef.from
+
+lp ("max", f.obj, f.con, f.dir, f.rhs, compute.sens=TRUE)$sens.coef.to
+
+# Duals
+
+lp ("max", f.obj, f.con, f.dir, f.rhs, compute.sens=TRUE)$duals
+
+# Mixed-type
+
+mixtype.sol <- lp ("max", f.obj, f.con, f.dir, f.rhs, int.vec=1:3)
+
+mixtype.sol$solution
+
+# 8-queens problem,
+chess.obj <- rep (1, 64)
+chess.obj
+
+q8 <- make.q8 ()
+q8
+
+chess.dir <- rep (c("=", "<"), c(16, 26))
+chess.dir
+
+chess.rhs <- rep (1, 42)
+chess.rhs
+
+queens8.sol <- lp ('max',
+                    chess.obj, , 
+                    chess.dir, 
+                    chess.rhs, 
+                    dense.const = q8,
+                    all.bin=TRUE, 
+                    num.bin.solns=3)
+
+queens8.sol$solution
