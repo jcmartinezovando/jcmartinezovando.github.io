@@ -20,7 +20,7 @@
       // Slide settings
       settings: {
                 title: 'CD2007 Metodos Cuantitativos y de Optimizacion',
-                        subtitle: 'Teoria de Decision - Parte 1',
+                        subtitle: 'Teoria de Decision - Proyecto',
                 useBuilds: true,
         usePrettify: true,
         enableSlideAreas: true,
@@ -3175,236 +3175,62 @@ line-height: 1.9;
           </hgroup>
   </slide>
 
-<slide class=""><hgroup><h2></h2></hgroup><article  class="smaller">
-
-</article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>1. Teoria de la Decision</h2></hgroup><article  id="teoria-de-la-decision" class="smaller ">
-
-</article></slide><slide class=""><hgroup><h2>1.1. Objetivos</h2></hgroup><article  id="objetivos" class="smaller ">
-
-<p>El objetivo de la teoría de decisión es el de brindar un marco conductual que nos ayude a distinguir los elementos los cuales los individuos tomamos decisiones cotidianas.</p>
-
-<p>Con este marco, podremos <strong>responder preguntas inferenciales</strong> con esta formalidad.</p>
-
-</article></slide><slide class=""><hgroup><h2></h2></hgroup><article  class="smaller">
-
-</article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>2. Elementos de la teoría de decisiones</h2></hgroup><article  id="elementos-de-la-teoría-de-decisiones" class="smaller ">
-
-</article></slide><slide class=""><hgroup><h2>2.1. Acciones</h2></hgroup><article  id="acciones" class="smaller ">
-
-<p>El elemento \((a)\) del problema de decisiones será referido al <strong>espacio de acciones</strong>, espacio donde descansan las alternativas que tenemos como individuos.</p>
-
-<p>Denotamos a este espacio como, \[
-\mathcal{A}=\{a_1,\ldots,a_A\},
-\] siendo \(A\) el número de acciones disponibles (notemos que puede ser infinito, inclusive).</p>
-
-<p><em>Notemos que cada acción que consideremos estará acompañada por lo que le sigue, una o varias consecuencias.</em></p>
-
-</article></slide><slide class=""><hgroup><h2></h2></hgroup><article  class="smaller">
-
-</article></slide><slide class=""><hgroup><h2>2.2. Consecuencias</h2></hgroup><article  id="consecuencias" class="smaller ">
-
-<p>El elemento (b) del problema corresponde al <strong>espacio de censecuencias</strong>, el cual estará referido/anclado a las acciones disponibles en \(\mathcal{A}\).</p>
-
-<p>En un contexto general, cada acción \(a_j\) estará acompañada por la colección de consecuencias posibles, denotado por \[
-\mathcal{C}_j=\{c_{j1},\ldots,c_{jC_{j}}\},
-\] siendo \(C_{j}\) el número de posibles consecuencias asociadas con la acción \(a_j\).</p>
-
-<p>El espacio de todas las consecuencias posibles es denotado por \[
-\mathcal{C}=\times_{j=1}^{A}\mathcal{C}_j.
-\]</p>
-
-</article></slide><slide class=""><hgroup><h2></h2></hgroup><article  class="smaller">
-
-<p><strong></strong></p>
-
-</article></slide><slide class=""><hgroup><h2></h2></hgroup><article  class="smaller">
-
-<p>Caso particular, <strong>sin incertidumbre</strong>, i.e. <em>una consecuencia por acción</em>.</p>
+<slide class=""><hgroup><h2>Background</h2></hgroup><article  id="background" class="smaller ">
 
 <ul>
-<li>Para cada acción \(a_j\) existe sólo una consecuencia, i.e. \[
-a_j \rightarrow c_{j1},
-\] para \(j=1,\ldots,A\).</li>
+<li><p>In the late 50s Markowitz laid down the foundations of the modern asset allocation.</p></li>
+<li><p>The main idea of <code>diversification</code>, which is at its heart, is still deeply rooted in investor’s mindset dictating allocation strategies.</p></li>
+<li><p>Rationale:</p></li>
 </ul>
 
-<p><em></em></p>
+<blockquote>
+<p>…do not put all the eggs in the same basket…</p>
+</blockquote>
 
-</article></slide><slide class=""><hgroup><h2></h2></hgroup><article  class="smaller">
+<ul>
+<li>It gave a quantitative dimension of concepts like <code>risk</code> and <code>return</code> and their mutual dependence and <code>trade-off</code></li>
+</ul>
 
-</article></slide><slide class=""><hgroup><h2>2.3. Preferencias</h2></hgroup><article  id="preferencias" class="smaller ">
+</article></slide><slide class=""><hgroup><h2>Stylezed facts about returns</h2></hgroup><article  id="stylezed-facts-about-returns" class="smaller ">
 
-<p><strong>Se supondrá que las preferencias que podamos definir entorno a \(\mathcal{}\) serán racionales (i.e. homogéneas a las acciones).</strong></p>
+<ul>
+<li><p>In first place, especially for daily data, it widely known they are not well described by <code>normal distributions</code>, as it is sometimes assumed.</p></li>
+<li><p>Second, <code>volatility</code> exhibits <code>clustering behaviour</code> (i.e. periods of high and low volatility seem to alternate in contrast with the <code>homoscedastic</code> assumptions of Markowitz).</p></li>
+<li><p>Third, <code>correlations</code> are assumed constant in the model while an overwhelming evidence has been given, that they are prone to increase during turbulent times.</p></li>
+</ul>
 
-<p>Las preferencias están definidas como un operador binario &ldquo;\(\succ\)&rdquo; bajo el cual para cada par de consecuencias, \(c_{jk}\) y \(c_{jl}\) diremos que</p>
-
-<table class = 'rmdtable'>
-<tr class="odd">
-<td align="left">\(c_{jk}\) es preferible a \(c_{jl}\)</td>
-<td align="right">\(\iff\)</td>
-<td align="center">\(c_{jk}\succ c_{jl}\)</td>
-</tr>
-</table>
-
-</article></slide><slide class=""><hgroup><h2></h2></hgroup><article  class="smaller">
-
-<p>De la relación anterior tendremos una de las siguientes tres opciones para \(c_{jk}\) y \(c_{jl}\):</p>
+</article></slide><slide class=""><hgroup><h2>Outline of the problem</h2></hgroup><article  id="outline-of-the-problem" class="smaller ">
 
 <ol>
-<li><p>\(c_{jk}\) es preferible a \(c_{jl}\) \(\iff\) \(c_{jk}\succ c_{jl}\)</p></li>
-<li><p>\(c_{jl}\) es preferible a \(c_{jk}\) \(\iff\) \(c_{jl}\succ c_{jk}\)</p></li>
-<li><p>\(c_{jk}\) y \(c_{jl}\) son indiferentes \(\iff\) \(c_{jk}\succ c_{jl}\) y \(c_{jl}\succ c_{jk}\)</p></li>
+<li><p>We will consider the problem of how to choose, given a fixed investment amount (the budget constraint), the optimal composition of a top portfolio (i.e., the weights, \(w\), to be given to several sub-portfolios).</p></li>
+<li><p>We assume that each sub-portfolio is invested in a <code>different asset class</code> and that it can be associated with a single dominant <code>risk factor</code>.</p></li>
 </ol>
 
-<p></p>
+</article></slide><slide class=""><hgroup><h2>Dataset</h2></hgroup><article  id="dataset" class="smaller ">
 
-</article></slide><slide class=""><hgroup><h2></h2></hgroup><article  class="smaller">
-
-<h3>2.3.1. Acciones y consecuencias</h3>
-
-<p>La regla de preferencia \(\succ\) está definida no solo en \(\mathcal{C}\) (o cada \(\mathcal{C}_{j}\) para \(j=1,\ldots,A\)), sino que define una regla de preferencias en las acciones \(\mathcal{A}\) indirectamente.</p>
-
-<p>Para entender esto, consideremos el <strong>caso sin incertidumbre</strong> donde cada acción tiene acompañana una consecuencia, i.e.</p>
-
-<p>\[
-\mathcal{A}\times\mathcal{C}=\{(a_j,c_{j1})\}_{j=1}^{A}.
-\]</p>
-
-<p>Diremos, \((a_{j},c_{j1})\) es preferible a \((a_{k},c_{k1})\) \(\iff\) \(c_{j1}\succ c_{k1}\).</p>
-
-<p>Es decir,</p>
-
-<table class = 'rmdtable'>
-<tr class="odd">
-<td align="left">\(a_{j}\) es preferible a \(a_{k}\)</td>
-<td align="left">\(\iff\)</td>
-<td align="left">\(c_{j1}\succ c_{k1}\)</td>
-</tr>
-</table>
-
-<p></p>
-
-</article></slide><slide class=""><hgroup><h2></h2></hgroup><article  class="smaller">
-
-</article></slide><slide class=""><hgroup><h2>2.4. Función de utilidad</h2></hgroup><article  id="función-de-utilidad" class="smaller ">
-
-<p>Con el propósito se estandarizar y hacer comparables las preferencias individuales (comparables entre acciones y entre individuos), definimos el elemento \((d)\) el problema de decision, referido a la <strong>función de utilidad</strong>.</p>
-
-<p>La función de utilidad se defines como la función \[
-U:\mathcal{A}\times\mathcal{C} \rightarrow \Re,
-\] inducida por el operador \(\succ\).</p>
-
-<p></p>
-
-<table class = 'rmdtable'>
-<tr class="odd">
-<td align="left">\(a_{j}\) es preferible a \(a_{k}\)</td>
-<td align="left">\(\iff\)</td>
-<td align="left">\(U(a_j,c_{j1}) &gt; U(a_k,c_{k1})\)</td>
-</tr>
-</table>
-
-<p>(En el contexto de <em>decisión sin incertidumbre</em>).</p>
-
-</article></slide><slide class=""><hgroup><h2></h2></hgroup><article  class="smaller">
-
-</article></slide><slide class=""><hgroup><h2>2.5. Regla de decision</h2></hgroup><article  id="regla-de-decision" class="smaller ">
-
-<p>Con base en la triada \((\mathcal{A},\mathcal{C},U)\) definimos ahora la <em>regla conductual</em> o <em>regla de decisión</em>.</p>
-
-<h3>2.5.1. Contexto sin incertidumbre</h3>
-
-<p>En el <em>contexto sin incertidumbre</em>, \(\{(a_j,c_{j1})\}_{j=1}^{A}\) elegiremos la acción óptima \(a^{*}\) definida como </p>
-
-<table class = 'rmdtable'>
-<tr class="odd">
-<td align="left"></td>
-<td align="left">Esta es la acción que domina \(\mathcal{A}\)</td>
-<td align="left"></td>
-</tr>
-</table>
-
-</article></slide><slide class=""><hgroup><h2></h2></hgroup><article  class="smaller">
-
-<h3>2.5.2. Contexto de consecuencia múltiples</h3>
-
-<p>En un contexto general, cada acción estará seguida por más de una consecuencia.</p>
-
-<p>En este caso, la regla de decisión puede definirse de varias formas. Consideraremos tres:</p>
+<p>The <code>dataset</code> we will use consists of four asset classes:</p>
 
 <ol>
-<li><p>Optimista (lo mejor de lo mejor)</p></li>
-<li><p>Pesimista (lo menos malo)</p></li>
-<li><p>Agregado</p></li>
+<li><p><code>Government Bonds</code>,</p></li>
+<li><p><code>Investment-Grade Credit Bonds</code>,</p></li>
+<li><p><code>Equities</code>,</p></li>
+<li><p><code>High-Grade RMBS Securities</code> (called asset class Bond, Credit, Equity and Mortgage, respectively, in the following).</p></li>
 </ol>
 
-</article></slide><slide class=""><hgroup><h2></h2></hgroup><article  class="smaller">
+</article></slide><slide class=""><hgroup><h2>Financial indices</h2></hgroup><article  id="financial-indices" class="smaller ">
 
-<h4>2.5.2.1. Optimista</h4>
-
-<p>Se define en dos pasos:</p>
+<p>Thus, the following indices are used:</p>
 
 <ol>
-<li>Dentro de cada acción \(a_j\) elegimos a consecuencia más deseable, \(c_j^{*}\), donde \[
-c_j^* = \arg\max_{C_{ji}\in\mathcal{C}_j} U(a_j,c_{ji}).
-\]</li>
-<li>Se elige la opción \(a^{*}\) que maximiza la <em>mejor consecuencia</em>, i.e. \[
-a^{*}=\arg\max_{a_j\in\mathcal{A}}U(a_j,c_{j}^{*}).
-\]</li>
+<li><p>For <code>Government Bond</code> the <code>BarCap US Treasury Index</code></p></li>
+<li><p>For <code>Investment-Grade Credit Bonds</code> the <code>BarCap US Credit Index</code></p></li>
+<li><p>For <code>Equity</code> the <code>S&amp;P 500</code></p></li>
+<li><p>For <code>High-Grade RMDS Securities</code> the <code>BarCap US MBS Index</code></p></li>
 </ol>
 
-<table class = 'rmdtable'>
-<tr class="odd">
-<td align="left"></td>
-<td align="left">Este \(a^{*}\) es lo mejor de lo mejor</td>
-<td align="left"></td>
-</tr>
-</table>
-
-</article></slide><slide class=""><hgroup><h2></h2></hgroup><article  class="smaller">
-
-<h4>2.5.2.2. Pesimista</h4>
-
-<p>Se define en dos pasos:</p>
-
-<ol>
-<li>Dentro de cada acción \(a_j\) elegimos a consecuencia menos deseable, \(c_j^{-}\), donde \[
-c_j^{-} = \arg\min_{C_{ji}\in\mathcal{C}_j} U(a_j,c_{ji}).
-\]</li>
-<li>Se elige la opción \(a^{*}\) que maximiza la <em>mejor consecuencia</em> menos deseable, i.e. \[
-a^{-}=\arg\max_{a_j\in\mathcal{A}}U(a_j,c_{j}^{-}).
-\]</li>
-</ol>
-
-<table class = 'rmdtable'>
-<tr class="odd">
-<td align="left"></td>
-<td align="left">Este \(a^{-}\) es lo menos peor</td>
-<td align="left"></td>
-</tr>
-</table>
-
-</article></slide><slide class=""><hgroup><h2></h2></hgroup><article  class="smaller">
-
-<h4>2.5.2.3. Promedio</h4>
-
-<p>Se define en dos pasos:</p>
-
-<ol>
-<li>Dentro de cada acción \(a_j\) cuantificamos la utilidad promedio entre las posibles consecuencias,<br/>\[
-\bar{U}(a_j) = \frac{1}{C_j}\sum_{j=1}^{C_j}U(a_j,c_{ji}).
-\]</li>
-<li>Se elige la opción \(a^{*}\) que maximiza la <em>mejor consecuencia</em> menos deseable, i.e. \[
-a^{*}=\arg\max_{a_j\in\mathcal{A}}\bar{U}(a_j).
-\]</li>
-</ol>
-
-<table class = 'rmdtable'>
-<tr class="odd">
-<td align="left"></td>
-<td align="left">Este \(a^{*}\) es lo mejor promedio</td>
-<td align="left"></td>
-</tr>
-</table></article></slide>
+<blockquote>
+<p>The dataset shall consists of daily returns for the above four indices, covering the period <code>February 1997</code> to <code>June 2019</code></p>
+</blockquote></article></slide>
 
 
   <slide class="backdrop"></slide>
