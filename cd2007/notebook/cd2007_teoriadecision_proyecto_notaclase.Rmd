@@ -1,0 +1,108 @@
+---
+title: "Portfolio Allocation Problem"
+author: "Juan Carlos Martinez-Ovando"
+date: "17/4/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Problema de asignacion de portafolios
+
+## A. Espacio de Acciones
+
+$\mathcal{A}={a_1,a_2}$
+
+## B. Espacio de consecuencias
+
+$\mathcal{C}=\{c_{11},c_{12},c_{21},c_{22}\}$
+
+## C. Funcion de preferencias (Utilidad)
+
+$\{U(a_i,c_{ij})\}_{i=1,j=1}^{2,2}$
+
+## D. Regla de decision
+
+
+1. `Optimista` - Elegir lo mejor de lo mejor, i.e. elegimos la accion que me genera la mejor consecuencia
+
+2. `Pesimista` - Elegimos lo menos pero, i.e. dentro de los peores escenarios posible spara cada accion, elegimos la que sea menos mala
+
+> Tanto A como B son `deficientes` en tanto que solo toman en cuenta extremos de consecuencias, pero no loas consecuencias intermedias.
+
+3. `Agregada` - Elegir la accion que en promedio me brinda la mejor consecuencia posible.
+
+Para cada accion, calculamos la consecuencia promedio
+
+$\bar{U}(a_1)=(1/2) U(a_1,c_{11}) + (1/2)U(a_1,c_{12})$
+
+y 
+
+$\bar{U}(a_2)=(1/2) U(a_2,c_{21}) + (1/2)U(a_2,c_{22})$
+
+
+donde 
+
+$$
+1/2 = \text{Posibilidad de tener la consecuencia} c_{ij} \text{respecto a la accion } a_i
+$$
+
+Consideramos ahora la extension, que consiste en sustuir la nocion de *posibilidad de consecuencias* por la nocion de *pobabilidad de consecuencias*
+
+> i.e. las consecuencias en $\mathcal{C}$ se convierten en inciertas para nosotros, y por consecuencia, podemos aompañarlas con una función de porbabilidad.
+
+## F. Espacio de incertidumbre
+
+$\mathcal{I}=\mathcal{C},$
+
+## G. Regla de probabilidad
+
+Cuantificacion de las probabilidades de que cada una de las consecuencias se manifiesten o no,
+
+i.e.
+
+Para cada accion, $a_i$, definira una funcion
+$$
+\mathbb{P}(c_{ij})=\text{Probabilidad de que al haber seleccionado la accion } a_i \text{se haya manifestado la consecuencia }c_{ij}. 
+$$
+
+De lo anterior se siguie que para laccion $a_1$, tenemos el pra de probabilidades
+$\mathbb{P}(c_{11})$ y $\mathbb{P}(c_{12})$, ambas positivas, de manera que 
+$$
+\mathbb{P}(c_{11}) + \mathbb{P}(c_{12}) = 1.
+$$
+
+De esta forma, en la regla agregada de decision, podriamos remplzar los coeficientes (1/2), por sus correspondientes probabilidaes, i.e.
+
+$\mathbb{P}(c_{11}) U(a_1,c_{11}) + \mathbb{P}(c_{12}) U(a_1,c_{12})=\mathbb{E}(U(a_1))$.
+
+De manera analoga, tendriamos
+
+$\mathbb{P}(c_{21}) U(a_1,c_{11}) + \mathbb{P}(c_{22}) U(a_1,c_{12})=\mathbb{E}(U(a_2))$.
+
+
+> La regla de decision se definira como la eleccion de la accion que el terminos esperados me arroje la mayor utilidad posible.
+
+
+## Resumiendo
+
+Los componentes el problema de decision bajo incertidumbre son:
+
+a. Espacio de acciones/decisiones (tengo control)
+
+b. Espacio de incetidumbre (no tengo control)
+
+c. Combinacion de (a) y (b), serian las consecuencias
+
+d. Cuantificacion de preferencias (utilidades)
+
+e. Funcion de probabilidad (cuantificar posibilidades)
+
+f. Relga de decision / **El unico enfoque admisible, sera el de la regla de decision agregada en esperanza**
+
+$$
+a^* = \arg\max_{a\in\mathcal{A}} \mathbb{E}_{\mathhbb{P}_a}(U(a,c_a)). 
+$$
+
