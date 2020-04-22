@@ -1,0 +1,467 @@
+---
+title: "Distribucion gaussiana (a.k.a. normal)"
+author:
+-  Juan Carlos Martínez-Ovando
+-  jc-mo@tec.mx
+date: "Febrero-Junio 2020"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    toc_depth: 2
+    number_sections: yes
+    self_contained: yes
+    theme: cerulean
+    highlight: textmate
+fig_align: "center"
+fig_width: 18
+---
+
+# Objetivos  {.tabset .tabset-fade .tabset-pills}
+
+* En esta sesion, aprenderemos algunas definiciones y propiedades de la distribucion normal/gaussiana multidimensional.
+
+* Entenderemos que esta distribucion nos permitira describir nuestra incertidumbre respecto al comportamiento de un conjunto de retornos de activos financieros, asi como describir su posible interaccion.
+
+* Entenderemos que la distribucion gaussiana se ubica en el centro de la contruccion de portafolios de inversion de Markowitz, para el problema de decision que estamos estudiando.
+
+* Aprenderemos como realizar calculos en `R` para esta distribucion.
+
+
+#Usos
+
+* La distribucion gaussiana *brinda* la posisilidad de estudiar **covariabilidad**, **simetria estocastica** y **simultaneidad** en fenomenos multidimensionales.
+
+* Provee un **marco parcimonioso** de modelacion.
+
+* Brinda una **plataforma de extension** de modelos sofisticados.
+
+#Limitaciones
+
+
+* Solamente se atiende a los **primeros dos momentos** de la variabilidad entre dimensiones multiples.
+
+# Caso Univariado
+
+
+Iniciamos con la distribucion gaussiana unidimensional, acompanada por una funcion de densidad de probabilidad,
+
+$$
+f(x|\mu,\lambda)
+= 
+(2\pi)^{-1/2} \lambda^{1/2} \exp\left\{-(\lambda/2) (x-\mu)^2\right\},
+$$
+con soporte en $\mathcal{X}=\mathbb{R}$. 
+
+* $\mu$ es parametro de localizacion.
+
+* $\lambda$ es parametro de dispersion (**precision**, en este caso).
+
+* El espacio parametral para ($\mu$,$\lambda$) es 
+$$
+\mathbb{R} \times \mathbb{R}_{+}.
+$$
+
+# Caso mulvivariado
+
+
+El caso multivariado es una extension del univariado para $\boldsymbol{x}=(x_1,\ldots,x_p)$, pero que toma en cuenta las **interacciones** entre las $(x_i)_{i=1}^{p}$. Esta tiene una funcion de densidad conjunta dada por,
+
+$$
+f(\boldsymbol{x}|\boldsymbol{\mu},\boldsymbol{\Lambda})
+= 
+(2\pi)^{-p/2} \det(\boldsymbol{\Lambda})^{1/2} 
+\exp\left\{-\frac{1}{2} (\boldsymbol{x}-\boldsymbol{\mu})'\boldsymbol{\Lambda}(\boldsymbol{x}-\boldsymbol{\mu})\right\},
+$$
+con soporte en $\mathbb{R}^{p}$ para $\boldsymbol{x}$. 
+
+* Espacio parametral para $\boldsymbol{\mu}$ es $\mathbb{R}^p$
+
+* Espacio parametral para $\boldsymbol{\Lambda}$ es $\mathcal{M}_p$ --espacio de todas las matrices de dimension $p \times p$ positivo definidas y simetricas--. 
+
+* Numero de **parametros independientes** en $\boldsymbol{\mu}$ es igual a $p$, mientras que el numero de parametros independientes en $\boldsymbol{\Lambda}$ es igual a $p(p+1)/2$.
+
+Propiedad P1
+--- 
+
+Si $\boldsymbol{X} \sim N(\boldsymbol{x}|\boldsymbol{\mu},\boldsymbol{\Lambda})$ entonces, 
+
+**P1.** Cualquier combinacion lineal de $\boldsymbol{X}$ es gaussiana multivariada, i.e. para todo $A$ matriz de dimension $q\times p$ y $c$ vector de dimension $q \times 1$, tales que
+$$
+\boldsymbol{\mu}_y = A\boldsymbol{\mu} + c,
+$$
+y
+$$
+\boldsymbol{\Lambda}_y = A\boldsymbol{\Lambda}A',
+$$
+
+se sigue que 
+$$
+\boldsymbol{Y}\sim N(\boldsymbol{y}|\boldsymbol{\mu}_y,\boldsymbol{\Lambda}_y),
+$$
+con soporte para $\boldsymbol{y}$ dado por $\mathbb{R}^{q}$.
+
+Propiedad P1
+--- 
+
+**Comentarios**
+
+* Esta propiedad es util ya que muchos problemas (contraste de hipotesis, agregacion, construccion de portafolios, proyecciones, etc.) pueden expresarse como una **transformacion afin (trasnformacion lineal anterior)**.
+
+Propiedad P2
+---
+
+Si $\boldsymbol{X} \sim N(\boldsymbol{x}|\boldsymbol{\mu},\boldsymbol{\Lambda})$ entonces, 
+
+**P2.** Cualquier sub-conjunto de $\boldsymbol{X}$, formado por subselecciones este vector, tiene una distribucion gaussiana multivariada asociada, i.e. si 
+$$
+\boldsymbol{X}_{s}=(X_{s(1)},\ldots,X_{s(q)}),
+$$
+es un subconjunto de $\boldsymbol{X}$, con $q\leq p$, para un subconjunto de indices $$
+(s(1),\ldots,s(q))$$
+de
+$$(1,\ldots,p).
+$$
+
+Propiedad P2
+---
+
+Se sigue que
+$$
+\boldsymbol{X}_{s} 
+\sim
+N(\boldsymbol{x}_{s}|\boldsymbol{\mu}_{s} ,\boldsymbol{\Lambda}_{s}),
+$$
+donde 
+$$
+\boldsymbol{\mu}_s=(\mu_{s(1)},\ldots,\mu_{s(q)}),
+$$
+y
+$$
+\boldsymbol{\Lambda}_s=\left(\lambda_{s(i)s(j)}\right)_{i,j=1}^{q}.
+$$
+
+**Comentarios**
+
+* Esta propiedad permite relaizar estudios conjuntos o marginales reducidos a partir del mismo procedimiento, mediante la implementacion del proceso de marginalizacion involucrado.
+
+Propiedad P3
+---
+
+Si $\boldsymbol{X} \sim N(\boldsymbol{x}|\boldsymbol{\mu},\boldsymbol{\Lambda})$ entonces, 
+
+**P3.** Si un subconjunto de $\boldsymbol{X}$  no esta correlacionado, entonces las variables de ese conjunto son *estocasticamente independientes*, i.e. si 
+$$
+(X_i,X_j),
+$$ son dos dimensiones de $\boldsymbol{X}$ (con $i,j<p$), tales que $$
+\lambda_{i,j}=0,
+$$
+se sigue que 
+$$
+X_i \text{ y }X_j,
+$$ 
+son independientes estocasticamente con,
+$$
+f(x_i,x_j|\mu_i,\mu_j,\lambda_{ii},\lambda_{jj},\lambda_{ij}) = N(x_i|\mu_i,\lambda_{ii})\times N(x_j|\mu_j,\lambda_{jj}).
+$$
+
+Propiedad P3
+---
+
+
+**Comentarios**
+
+* A partir de esta propiedad podemos **estudiar relaciones de dependencia lineal** entre dimensiones de un conjunto de datos o problemas multidimensionales.
+
+* Consideremos que las dependencias lineales se refieren *simultaneidad* mas no a *causalidad*.
+
+Propiedad P4
+---
+
+Si $\boldsymbol{X} \sim N(\boldsymbol{x}|\boldsymbol{\mu},\boldsymbol{\Lambda})$ entonces, 
+
+**P4.** Si un $A$ y $B$ son dos matrices de dimension ($q\times p$) tales que 
+$$
+A\boldsymbol{\Sigma}B' = \boldsymbol{0},
+$$
+de dimension $q\times q$, entonces
+
+Propiedad P4
+---
+
+Se sigue que las variables,
+$$
+\boldsymbol{Y}_A = A\boldsymbol{X} \ \text{ y } \
+\boldsymbol{Y}_B = B\boldsymbol{X},
+$$
+son **estocasticamente independientes**.
+
+**Comentarios**
+
+* A partir de esta propiedad, podemos entender que las estructuras de simultaneaidad entre variables pueden modificarse a traves de operaciones algebraicas teoricas.
+
+* Esta propiedad es crucial, porque podemos **modificar patrones subyacentes de dependencia/simetria estocastica** aplicando transformaciones lineales.
+
+Propiedad P5
+---
+
+**P5.** (Distribuciones condicionales). Si 
+$$
+\boldsymbol{X}=(\boldsymbol{X}_1,\boldsymbol{X}_2),
+$$
+donde ambos componentes son de dimension $p_1$ y $p_2$ respectivamente, (lo anterior se conoce como una particion de dos componentes de $\boldsymbol{X}$), con $p=p_1+p_2$, se sigue:
+
+* Los parametros del modelo tambien estan particionados de la siguiente forma, 
+$$
+\boldsymbol{\mu} = (\boldsymbol{\mu}_1,\boldsymbol{\mu}_2),
+$$
+
+$$
+\boldsymbol{\Lambda} = 
+\left(
+\begin{array}{cc}
+\boldsymbol{\Lambda}_{11} & \boldsymbol{\Lambda}_{12} \\
+\boldsymbol{\Lambda}_{21} & \boldsymbol{\Lambda}_{22}
+\end{array}
+\right).
+$$
+
+Propiedad P5
+---
+
+* La *distribucion marginal* de $\boldsymbol{X}_i$ (para $i=1,2$) es
+$$
+\boldsymbol{X}_i \sim N(\boldsymbol{x}_i|\boldsymbol{\mu}_i,\boldsymbol{\Lambda}_i).
+$$
+
+Propiedad P6
+---
+
+Si $\boldsymbol{X}$ es particionado en $\boldsymbol{X}_1$ y $\boldsymbol{X}_2$, se sigue:
+
+**P6.** La distribucion condicional de $\boldsymbol{X}_2$ dado $\boldsymbol{X}_1=\boldsymbol{x}_1$ es gaussiana multivariada, con 
+$$
+\boldsymbol{X}_2|\boldsymbol{X}_1=\boldsymbol{x}_1
+\sim
+N\left(\boldsymbol{x}_2|\boldsymbol{\mu}_{2|1},\boldsymbol{\Lambda}_{2|1}\right),
+$$
+donde 
+$$
+\boldsymbol{\mu}_{2|1} = \boldsymbol{\mu}_2 + \boldsymbol{\Lambda}_{21}\boldsymbol{\Lambda}_{11}^{-1}(\boldsymbol{x}_1-\boldsymbol{\mu}_1),
+$$
+y
+$$
+\boldsymbol{\Lambda}_{2|1} = \boldsymbol{\Lambda}_{22} - \boldsymbol{\Lambda}_{21}\boldsymbol{\Lambda}_{11}^{-1}\boldsymbol{\Lambda}_{12}.
+$$
+ 
+Propiedad P6
+---
+
+**Comentarios**
+ 
+* Esta propiedad es de **simetria estocastica**, en el sentido que la distribucion condicional de $\boldsymbol{X}_1|\boldsymbol{X}_2=\boldsymbol{x}_2$ es analoga.
+
+* Esta propiedad es fundamental para entender el modelo de regresion multiple.
+
+Descomposicion I
+---
+
+**Estructura espectral.-** Una matrix $P$ de dimension $p\times p$ es **ortogonal** si 
+$$
+P P' = P' P=I.
+$$
+
+**P7.** Una matrix $A$ simetrica de dimension $p\times p$ puede reexpresarse como $$A=P \Lambda P',$$
+donde 
+
+* $\Lambda = diag\{\lambda_1,\ldots,\lambda_p\}$ de *eigenvalores*
+
+* $P$ es una matriz ortogonal de eigenvectores columna.
+
+Descomposicion I
+---
+
+**Intuicion**
+
+* La matriz de *eigenvalores* representa *rotaciones* de coordenadas.
+
+* La matriz de *eigenvalores* representan *contracciones* o *expansiones* de coordenadas.
+
+Descomposicion II
+---
+
+**Acerca de determinantes.-** Bajo la descomposicion espectral de $\boldsymbol{\Lambda}^-1$ se sigue $$\det(\boldsymbol{\Lambda}^{-1})=\prod_{j=1}^{p}\phi_j.$$
+
+Esto es analogo a calcular los determinantes de $\boldsymbol{\Lambda}$, que estan determinados por 
+$$
+\det(\boldsymbol{\Lambda})=\prod_{j=1}^{p}\phi^{-1}_j,
+$$
+por ser $\boldsymbol{\Lambda}$ una matriz positivo definida y simetrica.
+
+Descomposicion II
+---
+
+**Intiucion**
+
+* Los **eigenvalores** de $\boldsymbol{\Lambda}^{-1}$ nos indican el grado de variabilidad de cada dimension (por separado) en $\boldsymbol{X}$
+
+* Los valores $\phi_j$ nos indican que tan expandida/contraida es la distribucion en esta dimension
+
+* El factor $\det(\boldsymbol{\Lambda}^{-1})$ puede verse como un factor de expansion/contraccion de la distribucion gaussiana conjunta.
+
+# Visualizacion
+
+
+La **grafica de contornos** nos permiten visualizar distribuciones gaussianas de dos dimensiones (i.e. es una representacion de graficas en 3D).
+
+Los *contornos* se obtienen como *rebanadas* de la densidad conjunta en 2D, y representan **areas cuantilicas** del soporte $\mathcal{X}$ para un nivel $0< c < 1$.
+
+Las lineas representan la coleccion de valores de $\boldsymbol{x}$ que comparten el mismo nivel de $N(\boldsymbol{x}|\mu,\Lambda)$.
+
+**Calculo.-** Los contornos se definen en terminos de $\Lambda$ y $P$ como **elipsoides** $$||\boldsymbol{\Lambda}^{1/2}(\boldsymbol{x}-\boldsymbol{\mu})||=c^{2},$$
+siendo centradas en 
+$$
+\boldsymbol{\mu},
+$$ 
+y con ejes en la direccion 
+$$
+\sqrt{\lambda_j p_j}.
+$$
+
+```{r}
+if (!require("mvtnorm")){install.packages("mvtnorm")}
+if (!require("MASS")){install.packages("mvtnorm")}
+library("mvtnorm")
+library("MASS")
+```
+
+Visualizacion I
+---
+
+**Caso: Independencia estocastica/simetria**
+
+```{r contour_1, echo=FALSE}
+x.points <- seq(-3,3,length.out=100)
+y.points <- x.points
+z <- matrix(0,nrow=100,ncol=100)
+mu <- c(0,0)
+sigma <- matrix(c(1,0,0,1),nrow=2)
+for(i in 1:100){
+  for(j in 1:100){
+    z[i,j] <- dmvnorm(c(x.points[i],y.points[j]),
+                      mean=mu,sigma=sigma)
+    }
+}
+contour(x.points,y.points,z)
+```
+
+Visualizacion II
+---
+
+**Caso: Dependencia positiva.**
+
+```{r contour_2, echo=FALSE}
+x.points <- seq(-3,3,length.out=100)
+y.points <- x.points
+z <- matrix(0,nrow=100,ncol=100)
+mu <- c(0,0)
+sigma <- matrix(c(2,1,1,1),nrow=2)
+for(i in 1:100){
+  for(j in 1:100){
+    z[i,j] <- dmvnorm(c(x.points[i],y.points[j]),
+                      mean=mu,sigma=sigma)
+    }
+}
+contour(x.points,y.points,z)
+```
+
+Visualizacion III
+---
+
+**Caso: Dependencia negativa.**
+
+```{r contour_3, echo=FALSE}
+x.points <- seq(-3,3,length.out=100)
+y.points <- x.points
+z <- matrix(0,nrow=100,ncol=100)
+mu <- c(0,0)
+sigma <- matrix(c(2,-1,-1,1),nrow=2)
+for(i in 1:100){
+  for(j in 1:100){
+    z[i,j] <- dmvnorm(c(x.points[i],y.points[j]),
+                      mean=mu,sigma=sigma)
+    }
+}
+contour(x.points,y.points,z)
+```
+
+# Verosimilitud
+
+
+La funcion de verosimilitud para $(\mu,\Lambda)$ condicional en un conjunto de datos, $\boldsymbol{x}_1,\ldots,\boldsymbol{x}_n$ se calcula como la densidad conjunta de los $n$ datos, **bajo el supuesto de independencia en las observaciones**, de la forma
+\begin{eqnarray}
+l(\mu,\Lambda|\boldsymbol{x}_1,\ldots,\boldsymbol{x}_n) 
+& =  & 
+\prod_{i}N(\boldsymbol{x}_i|\mu,\Lambda) \nonumber \\
+& \propto & 
+|\Lambda|^{n/2}\exp\left\{-\frac{1}{2}\sum_{i}(x_i-\mu)'\Lambda(x_i-\mu)\right\} \nonumber \\
+& \propto & 
+|\Lambda|^{n/2}\exp\left\{-\frac{1}{2}tr\left(\Lambda^{-1}(S+dd')\right)\right\}, \nonumber 
+\end{eqnarray}
+donde $d=\bar{x}-\mu$ y $S$ es la matriz de covarianzas muestral.
+
+# Ejercicio
+
+
+*La ultima linea de la ecuacion anterior es un ejercicio a casa. Consideren la complesion del cuadrado que esta en el documento suplementario de esta sesion (adjunto, escrito a mano).*
+
+# Estimacion I
+
+
+**Caso: Estimacion frecuentista.**
+
+A partir de las ecuaciones anteriores, podemos encontrar el **estimador maximo verosilil** de $\mu$ y $\Lambda$, dados por
+$$
+\hat{\mu}=\bar{x},
+$$
+y
+$$
+\hat{\Lambda}=\left(\sum_{i=1}^{n}(x_i-\bar{x})(x_i-\bar{x})'\right)^{-1}.
+$$
+
+*El ultimo estimador corresponde a la matriz inversa de covarianzas muestral.*
+
+Estimacion frecuentista
+---
+
+El *modelo mas compatible*, bajo el enfoque frecuentista, es 
+$$
+F(\cdot|\boldsymbol{\mu}^*,\boldsymbol{\Lambda}^*),$$
+tal que
+$$
+\boldsymbol{\mu}^*,\boldsymbol{\Lambda}^* = 
+\arg\max_{\boldsymbol{\mu},\boldsymbol{\Lambda}} l(\boldsymbol{\mu},\boldsymbol{\Lambda}|\text{datos}).
+$$
+
+Es decir,
+\begin{eqnarray}
+\boldsymbol{\mu}^*  & = &  \bar{x}, \nonumber \\
+\boldsymbol{\Lambda}^* & = & S^{-1}, \nonumber
+\end{eqnarray}
+con $S=\sum_{i=1}^{n}(x_i-\bar{x})(x_i-\bar{x})'.$
+
+*Se obtiene de manera analoga al caso univariado (revisen las lecturas complementarias).*
+
+# Comentarios
+
+
+La distribucion gaussiana multidimensional es una buena herramienta para:
+
+* Describir la aleatoriedad/desconocimiento en fenomenos multidimensionales.
+
+* Su buen uso descansa en el supuesto de **simetria eliptica**.
+
+* En la practica, la **simetria eliptica** puede corroborarse contrastando *graficas de dispersion de datos* con las curvas de nivel de **un modelo gaussiano multidimensional.**
+
+* A partir de esto, muchos procesos inferenciales (incluyendo prediccion, descomposiciones expectrales, contraste de hipotesis) pueden plantearse con esto.
+
