@@ -62,7 +62,7 @@ $$
 \mathbb{R} \times \mathbb{R}_{+}.
 $$
 
-# Caso mulvivariado
+# Caso Multivariado
 
 
 El caso multivariado es una extension del univariado para $\boldsymbol{x}=(x_1,\ldots,x_p)$, pero que toma en cuenta las **interacciones** entre las $(x_i)_{i=1}^{p}$. Esta tiene una funcion de densidad conjunta dada por,
@@ -101,8 +101,6 @@ $$
 $$
 con soporte para $\boldsymbol{y}$ dado por $\mathbb{R}^{q}$.
 
-Propiedad P1
---- 
 
 **Comentarios**
 
@@ -123,8 +121,6 @@ de
 $$(1,\ldots,p).
 $$
 
-Propiedad P2
----
 
 Se sigue que
 $$
@@ -165,9 +161,6 @@ $$
 f(x_i,x_j|\mu_i,\mu_j,\lambda_{ii},\lambda_{jj},\lambda_{ij}) = N(x_i|\mu_i,\lambda_{ii})\times N(x_j|\mu_j,\lambda_{jj}).
 $$
 
-Propiedad P3
----
-
 
 **Comentarios**
 
@@ -186,8 +179,6 @@ A\boldsymbol{\Sigma}B' = \boldsymbol{0},
 $$
 de dimension $q\times q$, entonces
 
-Propiedad P4
----
 
 Se sigue que las variables,
 $$
@@ -226,8 +217,6 @@ $$
 \right).
 $$
 
-Propiedad P5
----
 
 * La *distribucion marginal* de $\boldsymbol{X}_i$ (para $i=1,2$) es
 $$
@@ -254,8 +243,6 @@ $$
 \boldsymbol{\Lambda}_{2|1} = \boldsymbol{\Lambda}_{22} - \boldsymbol{\Lambda}_{21}\boldsymbol{\Lambda}_{11}^{-1}\boldsymbol{\Lambda}_{12}.
 $$
  
-Propiedad P6
----
 
 **Comentarios**
  
@@ -410,27 +397,6 @@ l(\mu,\Lambda|\boldsymbol{x}_1,\ldots,\boldsymbol{x}_n)
 \end{eqnarray}
 donde $d=\bar{x}-\mu$ y $S$ es la matriz de covarianzas muestral.
 
-# Ejercicio
-
-
-*La ultima linea de la ecuacion anterior es un ejercicio a casa. Consideren la complesion del cuadrado que esta en el documento suplementario de esta sesion (adjunto, escrito a mano).*
-
-# Estimacion I
-
-
-**Caso: Estimacion frecuentista.**
-
-A partir de las ecuaciones anteriores, podemos encontrar el **estimador maximo verosilil** de $\mu$ y $\Lambda$, dados por
-$$
-\hat{\mu}=\bar{x},
-$$
-y
-$$
-\hat{\Lambda}=\left(\sum_{i=1}^{n}(x_i-\bar{x})(x_i-\bar{x})'\right)^{-1}.
-$$
-
-*El ultimo estimador corresponde a la matriz inversa de covarianzas muestral.*
-
 Estimacion frecuentista
 ---
 
@@ -452,6 +418,20 @@ con $S=\sum_{i=1}^{n}(x_i-\bar{x})(x_i-\bar{x})'.$
 
 *Se obtiene de manera analoga al caso univariado (revisen las lecturas complementarias).*
 
+**Caso: Estimacion frecuentista.**
+
+A partir de las ecuaciones anteriores, podemos encontrar el **estimador maximo verosilil** de $\mu$ y $\Lambda$, dados por
+$$
+\hat{\mu}=\bar{x},
+$$
+y
+$$
+\hat{\Lambda}=\left(\sum_{i=1}^{n}(x_i-\bar{x})(x_i-\bar{x})'\right)^{-1}.
+$$
+
+*El ultimo estimador corresponde a la matriz inversa de covarianzas muestral.*
+
+
 # Comentarios
 
 
@@ -464,4 +444,10 @@ La distribucion gaussiana multidimensional es una buena herramienta para:
 * En la practica, la **simetria eliptica** puede corroborarse contrastando *graficas de dispersion de datos* con las curvas de nivel de **un modelo gaussiano multidimensional.**
 
 * A partir de esto, muchos procesos inferenciales (incluyendo prediccion, descomposiciones expectrales, contraste de hipotesis) pueden plantearse con esto.
+
+
+# Ejercicio
+
+
+*La ultima linea de la ecuacion anterior es un ejercicio a casa. Consideren la complesion del cuadrado que esta en el documento suplementario de esta sesion (adjunto, escrito a mano).*
 

@@ -1551,8 +1551,8 @@ f(x|\mu,\lambda)
 \]</span></p></li>
 </ul>
 </div>
-<div id="caso-mulvivariado" class="section level1">
-<h1><span class="header-section-number">3</span> Caso mulvivariado</h1>
+<div id="caso-multivariado" class="section level1">
+<h1><span class="header-section-number">3</span> Caso Multivariado</h1>
 <p>El caso multivariado es una extension del univariado para <span class="math inline">\(\boldsymbol{x}=(x_1,\ldots,x_p)\)</span>, pero que toma en cuenta las <strong>interacciones</strong> entre las <span class="math inline">\((x_i)_{i=1}^{p}\)</span>. Esta tiene una funcion de densidad conjunta dada por,</p>
 <p><span class="math display">\[
 f(\boldsymbol{x}|\boldsymbol{\mu},\boldsymbol{\Lambda})
@@ -1576,25 +1576,19 @@ f(\boldsymbol{x}|\boldsymbol{\mu},\boldsymbol{\Lambda})
 <p>se sigue que <span class="math display">\[
 \boldsymbol{Y}\sim N(\boldsymbol{y}|\boldsymbol{\mu}_y,\boldsymbol{\Lambda}_y),
 \]</span> con soporte para <span class="math inline">\(\boldsymbol{y}\)</span> dado por <span class="math inline">\(\mathbb{R}^{q}\)</span>.</p>
-</div>
-<div id="propiedad-p1-1" class="section level2">
-<h2><span class="header-section-number">3.2</span> Propiedad P1</h2>
 <p><strong>Comentarios</strong></p>
 <ul>
 <li>Esta propiedad es util ya que muchos problemas (contraste de hipotesis, agregacion, construccion de portafolios, proyecciones, etc.) pueden expresarse como una <strong>transformacion afin (trasnformacion lineal anterior)</strong>.</li>
 </ul>
 </div>
 <div id="propiedad-p2" class="section level2">
-<h2><span class="header-section-number">3.3</span> Propiedad P2</h2>
+<h2><span class="header-section-number">3.2</span> Propiedad P2</h2>
 <p>Si <span class="math inline">\(\boldsymbol{X} \sim N(\boldsymbol{x}|\boldsymbol{\mu},\boldsymbol{\Lambda})\)</span> entonces,</p>
 <p><strong>P2.</strong> Cualquier sub-conjunto de <span class="math inline">\(\boldsymbol{X}\)</span>, formado por subselecciones este vector, tiene una distribucion gaussiana multivariada asociada, i.e. si <span class="math display">\[
 \boldsymbol{X}_{s}=(X_{s(1)},\ldots,X_{s(q)}),
 \]</span> es un subconjunto de <span class="math inline">\(\boldsymbol{X}\)</span>, con <span class="math inline">\(q\leq p\)</span>, para un subconjunto de indices <span class="math display">\[
 (s(1),\ldots,s(q))\]</span> de <span class="math display">\[(1,\ldots,p).
 \]</span></p>
-</div>
-<div id="propiedad-p2-1" class="section level2">
-<h2><span class="header-section-number">3.4</span> Propiedad P2</h2>
 <p>Se sigue que <span class="math display">\[
 \boldsymbol{X}_{s} 
 \sim
@@ -1610,7 +1604,7 @@ N(\boldsymbol{x}_{s}|\boldsymbol{\mu}_{s} ,\boldsymbol{\Lambda}_{s}),
 </ul>
 </div>
 <div id="propiedad-p3" class="section level2">
-<h2><span class="header-section-number">3.5</span> Propiedad P3</h2>
+<h2><span class="header-section-number">3.3</span> Propiedad P3</h2>
 <p>Si <span class="math inline">\(\boldsymbol{X} \sim N(\boldsymbol{x}|\boldsymbol{\mu},\boldsymbol{\Lambda})\)</span> entonces,</p>
 <p><strong>P3.</strong> Si un subconjunto de <span class="math inline">\(\boldsymbol{X}\)</span> no esta correlacionado, entonces las variables de ese conjunto son <em>estocasticamente independientes</em>, i.e. si <span class="math display">\[
 (X_i,X_j),
@@ -1621,9 +1615,6 @@ X_i \text{ y }X_j,
 \]</span> son independientes estocasticamente con, <span class="math display">\[
 f(x_i,x_j|\mu_i,\mu_j,\lambda_{ii},\lambda_{jj},\lambda_{ij}) = N(x_i|\mu_i,\lambda_{ii})\times N(x_j|\mu_j,\lambda_{jj}).
 \]</span></p>
-</div>
-<div id="propiedad-p3-1" class="section level2">
-<h2><span class="header-section-number">3.6</span> Propiedad P3</h2>
 <p><strong>Comentarios</strong></p>
 <ul>
 <li><p>A partir de esta propiedad podemos <strong>estudiar relaciones de dependencia lineal</strong> entre dimensiones de un conjunto de datos o problemas multidimensionales.</p></li>
@@ -1631,14 +1622,11 @@ f(x_i,x_j|\mu_i,\mu_j,\lambda_{ii},\lambda_{jj},\lambda_{ij}) = N(x_i|\mu_i,\lam
 </ul>
 </div>
 <div id="propiedad-p4" class="section level2">
-<h2><span class="header-section-number">3.7</span> Propiedad P4</h2>
+<h2><span class="header-section-number">3.4</span> Propiedad P4</h2>
 <p>Si <span class="math inline">\(\boldsymbol{X} \sim N(\boldsymbol{x}|\boldsymbol{\mu},\boldsymbol{\Lambda})\)</span> entonces,</p>
 <p><strong>P4.</strong> Si un <span class="math inline">\(A\)</span> y <span class="math inline">\(B\)</span> son dos matrices de dimension (<span class="math inline">\(q\times p\)</span>) tales que <span class="math display">\[
 A\boldsymbol{\Sigma}B&#39; = \boldsymbol{0},
 \]</span> de dimension <span class="math inline">\(q\times q\)</span>, entonces</p>
-</div>
-<div id="propiedad-p4-1" class="section level2">
-<h2><span class="header-section-number">3.8</span> Propiedad P4</h2>
 <p>Se sigue que las variables, <span class="math display">\[
 \boldsymbol{Y}_A = A\boldsymbol{X} \ \text{ y } \
 \boldsymbol{Y}_B = B\boldsymbol{X},
@@ -1650,7 +1638,7 @@ A\boldsymbol{\Sigma}B&#39; = \boldsymbol{0},
 </ul>
 </div>
 <div id="propiedad-p5" class="section level2">
-<h2><span class="header-section-number">3.9</span> Propiedad P5</h2>
+<h2><span class="header-section-number">3.5</span> Propiedad P5</h2>
 <p><strong>P5.</strong> (Distribuciones condicionales). Si <span class="math display">\[
 \boldsymbol{X}=(\boldsymbol{X}_1,\boldsymbol{X}_2),
 \]</span> donde ambos componentes son de dimension <span class="math inline">\(p_1\)</span> y <span class="math inline">\(p_2\)</span> respectivamente, (lo anterior se conoce como una particion de dos componentes de <span class="math inline">\(\boldsymbol{X}\)</span>), con <span class="math inline">\(p=p_1+p_2\)</span>, se sigue:</p>
@@ -1668,9 +1656,6 @@ A\boldsymbol{\Sigma}B&#39; = \boldsymbol{0},
 \end{array}
 \right).
 \]</span></p>
-</div>
-<div id="propiedad-p5-1" class="section level2">
-<h2><span class="header-section-number">3.10</span> Propiedad P5</h2>
 <ul>
 <li>La <em>distribucion marginal</em> de <span class="math inline">\(\boldsymbol{X}_i\)</span> (para <span class="math inline">\(i=1,2\)</span>) es <span class="math display">\[
 \boldsymbol{X}_i \sim N(\boldsymbol{x}_i|\boldsymbol{\mu}_i,\boldsymbol{\Lambda}_i).
@@ -1678,7 +1663,7 @@ A\boldsymbol{\Sigma}B&#39; = \boldsymbol{0},
 </ul>
 </div>
 <div id="propiedad-p6" class="section level2">
-<h2><span class="header-section-number">3.11</span> Propiedad P6</h2>
+<h2><span class="header-section-number">3.6</span> Propiedad P6</h2>
 <p>Si <span class="math inline">\(\boldsymbol{X}\)</span> es particionado en <span class="math inline">\(\boldsymbol{X}_1\)</span> y <span class="math inline">\(\boldsymbol{X}_2\)</span>, se sigue:</p>
 <p><strong>P6.</strong> La distribucion condicional de <span class="math inline">\(\boldsymbol{X}_2\)</span> dado <span class="math inline">\(\boldsymbol{X}_1=\boldsymbol{x}_1\)</span> es gaussiana multivariada, con <span class="math display">\[
 \boldsymbol{X}_2|\boldsymbol{X}_1=\boldsymbol{x}_1
@@ -1689,9 +1674,6 @@ N\left(\boldsymbol{x}_2|\boldsymbol{\mu}_{2|1},\boldsymbol{\Lambda}_{2|1}\right)
 \]</span> y <span class="math display">\[
 \boldsymbol{\Lambda}_{2|1} = \boldsymbol{\Lambda}_{22} - \boldsymbol{\Lambda}_{21}\boldsymbol{\Lambda}_{11}^{-1}\boldsymbol{\Lambda}_{12}.
 \]</span></p>
-</div>
-<div id="propiedad-p6-1" class="section level2">
-<h2><span class="header-section-number">3.12</span> Propiedad P6</h2>
 <p><strong>Comentarios</strong></p>
 <ul>
 <li><p>Esta propiedad es de <strong>simetria estocastica</strong>, en el sentido que la distribucion condicional de <span class="math inline">\(\boldsymbol{X}_1|\boldsymbol{X}_2=\boldsymbol{x}_2\)</span> es analoga.</p></li>
@@ -1699,7 +1681,7 @@ N\left(\boldsymbol{x}_2|\boldsymbol{\mu}_{2|1},\boldsymbol{\Lambda}_{2|1}\right)
 </ul>
 </div>
 <div id="descomposicion-i" class="section level2">
-<h2><span class="header-section-number">3.13</span> Descomposicion I</h2>
+<h2><span class="header-section-number">3.7</span> Descomposicion I</h2>
 <p><strong>Estructura espectral.-</strong> Una matrix <span class="math inline">\(P\)</span> de dimension <span class="math inline">\(p\times p\)</span> es <strong>ortogonal</strong> si <span class="math display">\[
 P P&#39; = P&#39; P=I.
 \]</span></p>
@@ -1710,7 +1692,7 @@ P P&#39; = P&#39; P=I.
 </ul>
 </div>
 <div id="descomposicion-i-1" class="section level2">
-<h2><span class="header-section-number">3.14</span> Descomposicion I</h2>
+<h2><span class="header-section-number">3.8</span> Descomposicion I</h2>
 <p><strong>Intuicion</strong></p>
 <ul>
 <li><p>La matriz de <em>eigenvalores</em> representa <em>rotaciones</em> de coordenadas.</p></li>
@@ -1718,14 +1700,14 @@ P P&#39; = P&#39; P=I.
 </ul>
 </div>
 <div id="descomposicion-ii" class="section level2">
-<h2><span class="header-section-number">3.15</span> Descomposicion II</h2>
+<h2><span class="header-section-number">3.9</span> Descomposicion II</h2>
 <p><strong>Acerca de determinantes.-</strong> Bajo la descomposicion espectral de <span class="math inline">\(\boldsymbol{\Lambda}^-1\)</span> se sigue <span class="math display">\[\det(\boldsymbol{\Lambda}^{-1})=\prod_{j=1}^{p}\phi_j.\]</span></p>
 <p>Esto es analogo a calcular los determinantes de <span class="math inline">\(\boldsymbol{\Lambda}\)</span>, que estan determinados por <span class="math display">\[
 \det(\boldsymbol{\Lambda})=\prod_{j=1}^{p}\phi^{-1}_j,
 \]</span> por ser <span class="math inline">\(\boldsymbol{\Lambda}\)</span> una matriz positivo definida y simetrica.</p>
 </div>
 <div id="descomposicion-ii-1" class="section level2">
-<h2><span class="header-section-number">3.16</span> Descomposicion II</h2>
+<h2><span class="header-section-number">3.10</span> Descomposicion II</h2>
 <p><strong>Intiucion</strong></p>
 <ul>
 <li><p>Los <strong>eigenvalores</strong> de <span class="math inline">\(\boldsymbol{\Lambda}^{-1}\)</span> nos indican el grado de variabilidad de cada dimension (por separado) en <span class="math inline">\(\boldsymbol{X}\)</span></p></li>
@@ -1777,22 +1759,8 @@ l(\mu,\Lambda|\boldsymbol{x}_1,\ldots,\boldsymbol{x}_n)
 &amp; \propto &amp; 
 |\Lambda|^{n/2}\exp\left\{-\frac{1}{2}tr\left(\Lambda^{-1}(S+dd&#39;)\right)\right\}, \nonumber 
 \end{eqnarray}\]</span> donde <span class="math inline">\(d=\bar{x}-\mu\)</span> y <span class="math inline">\(S\)</span> es la matriz de covarianzas muestral.</p>
-</div>
-<div id="ejercicio" class="section level1">
-<h1><span class="header-section-number">6</span> Ejercicio</h1>
-<p><em>La ultima linea de la ecuacion anterior es un ejercicio a casa. Consideren la complesion del cuadrado que esta en el documento suplementario de esta sesion (adjunto, escrito a mano).</em></p>
-</div>
-<div id="estimacion-i" class="section level1">
-<h1><span class="header-section-number">7</span> Estimacion I</h1>
-<p><strong>Caso: Estimacion frecuentista.</strong></p>
-<p>A partir de las ecuaciones anteriores, podemos encontrar el <strong>estimador maximo verosilil</strong> de <span class="math inline">\(\mu\)</span> y <span class="math inline">\(\Lambda\)</span>, dados por <span class="math display">\[
-\hat{\mu}=\bar{x},
-\]</span> y <span class="math display">\[
-\hat{\Lambda}=\left(\sum_{i=1}^{n}(x_i-\bar{x})(x_i-\bar{x})&#39;\right)^{-1}.
-\]</span></p>
-<p><em>El ultimo estimador corresponde a la matriz inversa de covarianzas muestral.</em></p>
 <div id="estimacion-frecuentista" class="section level2">
-<h2><span class="header-section-number">7.1</span> Estimacion frecuentista</h2>
+<h2><span class="header-section-number">5.1</span> Estimacion frecuentista</h2>
 <p>El <em>modelo mas compatible</em>, bajo el enfoque frecuentista, es <span class="math display">\[
 F(\cdot|\boldsymbol{\mu}^*,\boldsymbol{\Lambda}^*),\]</span> tal que <span class="math display">\[
 \boldsymbol{\mu}^*,\boldsymbol{\Lambda}^* = 
@@ -1803,10 +1771,17 @@ F(\cdot|\boldsymbol{\mu}^*,\boldsymbol{\Lambda}^*),\]</span> tal que <span class
 \boldsymbol{\Lambda}^* &amp; = &amp; S^{-1}, \nonumber
 \end{eqnarray}\]</span> con <span class="math inline">\(S=\sum_{i=1}^{n}(x_i-\bar{x})(x_i-\bar{x})&#39;.\)</span></p>
 <p><em>Se obtiene de manera analoga al caso univariado (revisen las lecturas complementarias).</em></p>
+<p><strong>Caso: Estimacion frecuentista.</strong></p>
+<p>A partir de las ecuaciones anteriores, podemos encontrar el <strong>estimador maximo verosilil</strong> de <span class="math inline">\(\mu\)</span> y <span class="math inline">\(\Lambda\)</span>, dados por <span class="math display">\[
+\hat{\mu}=\bar{x},
+\]</span> y <span class="math display">\[
+\hat{\Lambda}=\left(\sum_{i=1}^{n}(x_i-\bar{x})(x_i-\bar{x})&#39;\right)^{-1}.
+\]</span></p>
+<p><em>El ultimo estimador corresponde a la matriz inversa de covarianzas muestral.</em></p>
 </div>
 </div>
 <div id="comentarios" class="section level1">
-<h1><span class="header-section-number">8</span> Comentarios</h1>
+<h1><span class="header-section-number">6</span> Comentarios</h1>
 <p>La distribucion gaussiana multidimensional es una buena herramienta para:</p>
 <ul>
 <li><p>Describir la aleatoriedad/desconocimiento en fenomenos multidimensionales.</p></li>
@@ -1814,6 +1789,10 @@ F(\cdot|\boldsymbol{\mu}^*,\boldsymbol{\Lambda}^*),\]</span> tal que <span class
 <li><p>En la practica, la <strong>simetria eliptica</strong> puede corroborarse contrastando <em>graficas de dispersion de datos</em> con las curvas de nivel de <strong>un modelo gaussiano multidimensional.</strong></p></li>
 <li><p>A partir de esto, muchos procesos inferenciales (incluyendo prediccion, descomposiciones expectrales, contraste de hipotesis) pueden plantearse con esto.</p></li>
 </ul>
+</div>
+<div id="ejercicio" class="section level1">
+<h1><span class="header-section-number">7</span> Ejercicio</h1>
+<p><em>La ultima linea de la ecuacion anterior es un ejercicio a casa. Consideren la complesion del cuadrado que esta en el documento suplementario de esta sesion (adjunto, escrito a mano).</em></p>
 </div>
 
 
