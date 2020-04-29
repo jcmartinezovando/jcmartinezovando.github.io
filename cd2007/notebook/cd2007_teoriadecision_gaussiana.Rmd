@@ -265,9 +265,6 @@ donde
 
 * $P$ es una matriz ortogonal de eigenvectores columna.
 
-Descomposicion I
----
-
 **Intuicion**
 
 * La matriz de *eigenvalores* representa *rotaciones* de coordenadas.
@@ -285,8 +282,6 @@ $$
 $$
 por ser $\boldsymbol{\Lambda}$ una matriz positivo definida y simetrica.
 
-Descomposicion II
----
 
 **Intiucion**
 
