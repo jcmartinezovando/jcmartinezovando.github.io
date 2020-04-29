@@ -99,6 +99,8 @@ The command `str()` returns the object structure. In this case, it’s a `xts` o
 Now we can plot daily prices, using the `Adjusted Price` column, since it incorporates events like splits and dividends distribution, which can affect the series.
 
 ```{r}
+plot(pbr[,6])
+
 ggplot(pbr, 
        aes(x = index(pbr), y = pbr[,6])) + 
   geom_line(color = "darkblue") + 
