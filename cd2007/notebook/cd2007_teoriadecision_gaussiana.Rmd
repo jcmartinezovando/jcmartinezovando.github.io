@@ -440,9 +440,3 @@ La distribucion gaussiana multidimensional es una buena herramienta para:
 
 * A partir de esto, muchos procesos inferenciales (incluyendo prediccion, descomposiciones expectrales, contraste de hipotesis) pueden plantearse con esto.
 
-
-# Ejercicio
-
-
-*La ultima linea de la ecuacion anterior es un ejercicio a casa. Consideren la complesion del cuadrado que esta en el documento suplementario de esta sesion (adjunto, escrito a mano).*
-
