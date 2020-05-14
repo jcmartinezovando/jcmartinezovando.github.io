@@ -19,7 +19,7 @@ fig_width: 18
 
 # Objetives  {.tabset .tabset-fade .tabset-pills}
 
-* Conceptually describe in what situations the linear programming method can be applied, and what this quantitative tool consists of.
+* Conceptually describing in what situations the linear programming method can be applied, and what this quantitative tool consists of.
 
 * Describe the general steps to follow in solving linear programming problems.
 
@@ -40,7 +40,7 @@ Product distribution consideration allow the company to produce at most 200 mete
 
 Due to demand, the market can take up to 102.8571 meters of both types of cables, among which 42.85714 percent must be of 10 mm diameter cable, and 57.14286 percent of 5mm diameter cable.
 
-Both cables are respectively sold at 350 and 200 EUR the meter.
+Both cables are respectively sold at 350 and 300 EUR the meter.
 
 > Question: **What amount of meters must the company produce of both types of cables in order to maximize its weekly revenue?**
 
@@ -78,7 +78,7 @@ Why **linear programming** is a very important topic?
 
 * Nowadays, here exist efficient methods to solve them -- or at least give good approximations--.
 
-## What is a **linear programm**?
+## What is a **linear programming problem**?
 
 It is an *optimization problem* consisting in
 
@@ -406,6 +406,7 @@ The instruction
 ```
 library("lpSolve")
 ```
+
 is intended to call and load the package `lpSolve` for use.
 
 ## Defining parameters

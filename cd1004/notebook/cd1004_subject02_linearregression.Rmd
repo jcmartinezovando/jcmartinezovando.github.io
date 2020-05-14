@@ -1,0 +1,39 @@
+---
+title: "Subject 01 - Linear Programming"
+author:
+-  Juan Carlos Martínez-Ovando
+-  jc-mo@tec.mx
+date: "Feb-Jun 2020"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    toc_depth: 2
+    number_sections: yes
+    self_contained: yes
+    theme: cerulean
+    highlight: textmate
+fig_align: "center"
+fig_width: 18
+---
+
+# Objetives  {.tabset .tabset-fade .tabset-pills}
+
+* 
+
+
+# Line fitting, residuals, and correlation
+
+## Fitting a line to data
+
+### **Modeling numerical variables**
+
+In this unit we will learn to quantify the relationship between two numerical variables, as well as modeling numerical response variables using a numerical or categorical explanatory variable.
+
+### Poverty vs. HS graduate rate
+
+The `scatterplot` below shows the relationship between HS graduate rate in all 50 US states and DC and the \% of residents who live below the poverty line (*income below \$23,050 for a family of 4 in 2012*).
+
+![**Imagen**](./figures/poverty/poverty.hsgrad.pdf)
+
+\includegraphics[width=\textwidth]{./figures/poverty/poverty.hsgrad.pdf}
