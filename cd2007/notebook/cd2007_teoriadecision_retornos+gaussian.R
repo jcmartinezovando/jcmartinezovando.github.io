@@ -42,6 +42,7 @@ plot(spy_ret)
 
 colnames(spy_ret)
 head(spy_ret)
+head(pbr_ret)
 
 dim(spy)
 dim(spy_ret)
@@ -52,14 +53,19 @@ dim(spy_ret)
 port_ret <- cbind(pbr_ret,spy_ret)
 
 head(port_ret)
-dim(pbr_ret)
+dim(port_ret)
 
 plot(port_ret)
+var(port_ret[,1])
+var(port_ret[,2])
 
 summary(port_ret)
 
 
 # Joint dynamics
+
+if(!require("mvtnorm")){install.packages("mvtnorm")}
+if(!require("MASS")){install.packages("MASS")}
 
 library("mvtnorm")
 library("MASS")
@@ -83,6 +89,7 @@ for(i in 1:100){
                       sigma=sigma.est)
   }
 }
+z
 contour(x.points,y.points,z)
 
 
@@ -110,6 +117,21 @@ legend("topright",
        labels, 
        col=c("blue","red"),
        lwd=2, lty=c(1, 1))
+
+plot(y.points, den.y, 
+     type="l", lty=2,
+     xlab="Return value",
+     ylab="Density",
+     col="blue",
+     main="Nasdaq")
+
+
+plot(x.points, den.x, 
+     type="l", lty=2,
+     col="red",
+     xlab="Return value",
+     ylab="Density",
+     main="Petrobras")
 
 # Portafolio
 
