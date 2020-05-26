@@ -1,9 +1,10 @@
 
 # Ejemplo 
 
+if(!require("quantmod")){install.packages("quantmod")}
 library("quantmod")
 
-# Petrobrass series
+# Petrobras series
 
 pbr <- getSymbols("PBR", 
                   src = "yahoo", 
@@ -16,6 +17,7 @@ summary(pbr)
 plot(pbr[,6])
 
 pbr_ret <- diff(log(pbr[,6]))
+head(pbr_ret)
 pbr_ret <- pbr_ret[-1,]
 plot(pbr_ret)
 
@@ -25,7 +27,7 @@ head(pbr_ret)
 dim(pbr)
 dim(pbr_ret)
 
-# Basdaq series (USD)
+# SP500 series (USD)
 spy <- getSymbols("SPY", 
                   src = "yahoo", 
                   from = "2013-01-01", 
@@ -52,8 +54,14 @@ dim(spy_ret)
 
 port_ret <- cbind(pbr_ret,spy_ret)
 
+
 head(port_ret)
 dim(port_ret)
+
+write.table(port_ret,
+            file = "port_ret.csv",
+            col.names =TRUE)
+
 
 plot(port_ret)
 var(port_ret[,1])
@@ -123,7 +131,7 @@ plot(y.points, den.y,
      xlab="Return value",
      ylab="Density",
      col="blue",
-     main="Nasdaq")
+     main="SP500")
 
 
 plot(x.points, den.x, 
@@ -135,7 +143,7 @@ plot(x.points, den.x,
 
 # Portafolio
 
-port_w <- as.matrix(c(0.65,0.35))
+port_w <- as.matrix(c(0.95,0.05))
 port_w
 
 port_mu <- t(port_w) %*% mu.est
@@ -152,6 +160,6 @@ plot(port.points, den.port,
      xlab="Return value",
      ylab="Density",
      col="green",
-     main="Portfolio distribution w=(.65,.36)")
+     main="Portfolio distribution w=(.05,.95)")
 
 
